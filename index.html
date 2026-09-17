@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="description"
+    content="Cacao nguyên chất được sản xuất theo mẻ nhỏ, hương vị đậm đà và cân bằng. Khám phá sản phẩm cacao và câu chuyện của chúng tôi." />
+
+  <title>YOUR CACAO — Cacao Nguyên Chất</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- Announcement -->
+  <div class="announcement" data-i18n="announcement">
+    Miễn phí vận chuyển cho đơn hàng trên 500,000 ₫ · Cacao sản xuất theo mẻ nhỏ
+  </div>
+
+
+  <!-- Header -->
+  <header class="site-header">
+
+    <a class="brand" href="#top" aria-label="Trang chủ YOUR CACAO">
+      YOUR CACAO
+    </a>
+
+    <button class="menu-toggle" aria-label="Mở menu" aria-expanded="false">
+      ☰
+    </button>
+
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="#shop" data-i18n="navShop">Sản phẩm</a>
+      <a href="#story" data-i18n="navStory">Câu chuyện</a>
+      <a href="#ritual" data-i18n="navRitual">Cách pha cacao</a>
+      <a href="#contact" data-i18n="navContact">Liên hệ</a>
+    </nav>
+
+    <div class="header-actions">
+
+      <!-- Language selector -->
+      <select id="languageSelector" class="language-selector" aria-label="Chọn ngôn ngữ">
+        <option value="vi">🇻🇳 VI</option>
+        <option value="en">🇬🇧 EN</option>
+      </select>
+
+      <!-- Cart -->
+      <button class="cart-button" id="cartButton" aria-label="Mở giỏ hàng">
+        <span data-i18n="cart">Giỏ hàng</span>
+        <span id="cartCount">0</span>
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main id="top">
+
+    <!-- Product Hero -->
+    <section class="hero" id="shop">
+
+      <div class="product-stage">
+
+        <span class="eyebrow" data-i18n="heroEyebrow">
+          Cacao nguyên chất · Nguồn gốc rõ ràng
+        </span>
+
+        <img class="product-pack" src="assets/product-pack.svg" alt="Gói bột cacao nguyên chất YOUR CACAO" />
+
+        <div class="floating-note note-one" data-i18n="notePure">
+          100% cacao
+        </div>
+
+        <div class="floating-note note-two" data-i18n="noteBalanced">
+          Đậm đà & cân bằng
+        </div>
+
+      </div>
+
+
+      <div class="product-info">
+
+        <p class="eyebrow" data-i18n="productEyebrow">
+          Bột cacao nguyên chất
+        </p>
+
+        <h1>
+          <span data-i18n="productTitle">
+            Cacao Nguyên Chất
+          </span>
+
+          <br>
+
+          <em data-i18n="productSubtitle">
+            Rang Cân Bằng
+          </em>
+        </h1>
+
+        <p class="price" id="price">
+          129,000 ₫
+        </p>
+
+        <p class="intro" data-i18n="productIntro">
+          Hương chocolate đậm đà, hậu vị sạch và vị đắng tự nhiên cân bằng.
+          Thích hợp để pha cacao nóng, cacao đá, làm bánh và sử dụng mỗi ngày.
+        </p>
+
+
+        <!-- Product Controls -->
+        <div class="product-controls">
+
+          <label for="sizeOptions" data-i18n="size">
+            Khối lượng
+          </label>
+
+          <div class="size-options" id="sizeOptions" role="group" aria-label="Chọn khối lượng">
+
+            <button class="size-btn active" data-size="150g" data-price="129000">
+              150g
+            </button>
+
+            <button class="size-btn" data-size="300g" data-price="239000">
+              300g
+            </button>
+
+            <button class="size-btn" data-size="500g" data-price="399000">
+              500g
+            </button>
+
+          </div>
+
+
+          <label for="quantity" data-i18n="quantity">
+            Số lượng
+          </label>
+
+
+          <div class="buy-row">
+
+            <div class="quantity" id="quantity">
+
+              <button id="minus" aria-label="Giảm số lượng">
+                −
+              </button>
+
+              <span id="quantityValue">
+                1
+              </span>
+
+              <button id="plus" aria-label="Tăng số lượng">
+                +
+              </button>
+
+            </div>
+
+
+            <button class="add-to-cart" id="addToCart">
+              <span data-i18n="addToCart">
+                Thêm vào giỏ
+              </span>
+
+              ·
+
+              <span id="buttonPrice">
+                129,000 ₫
+              </span>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- Trust -->
+        <div class="trust-row">
+
+          <span data-i18n="trustNoAdditives">
+            ✓ Không phụ gia
+          </span>
+
+          <span data-i18n="trustVegan">
+            ✓ Thuần chay
+          </span>
+
+          <span data-i18n="trustSmallBatch">
+            ✓ Sản xuất theo mẻ nhỏ
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Marquee -->
+    <section class="marquee" aria-label="Giá trị thương hiệu">
+
+      <div data-i18n="marquee">
+        CACAO NGUYÊN CHẤT ✦ RANG CHẬM ✦ NGUỒN GỐC RÕ RÀNG ✦ HƯƠNG VỊ TỰ NHIÊN ✦
+      </div>
+
+    </section>
+
+
+    <!-- Story -->
+    <section class="story section-grid" id="story">
+
+      <div>
+
+        <p class="eyebrow" data-i18n="storyEyebrow">
+          Từ hạt cacao đến ly cacao
+        </p>
+
+        <h2 data-i18n="storyTitle">
+          Cacao nguyên bản, không có gì để che giấu.
+        </h2>
+
+      </div>
+
+
+      <div class="story-copy">
+
+        <p data-i18n="storyParagraphOne">
+          Chúng tôi giữ danh sách thành phần thật đơn giản và chú trọng vào
+          từng bước trong quá trình sản xuất. Hạt cacao được lựa chọn dựa
+          trên hương vị, rang để giữ lại hương thơm tự nhiên, sau đó được
+          nghiền thành bột mịn phù hợp cho cả đồ uống nóng và lạnh.
+        </p>
+
+        <p data-i18n="storyParagraphTwo">
+          Hãy thay phần nội dung này bằng câu chuyện thật của thương hiệu:
+          vùng trồng cacao, nông trại, quá trình lên men, rang, nguồn nguyên
+          liệu hoặc câu chuyện của người sáng lập.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- Features -->
+    <section class="feature-cards">
+
+      <article>
+
+        <span>01</span>
+
+        <h3 data-i18n="featureOneTitle">
+          Thành phần nguyên chất
+        </h3>
+
+        <p data-i18n="featureOneText">
+          100% bột cacao. Không chất độn, không hương liệu nhân tạo và
+          không có các thành phần không cần thiết.
+        </p>
+
+      </article>
+
+
+      <article>
+
+        <span>02</span>
+
+        <h3 data-i18n="featureTwoTitle">
+          Hương vị cân bằng
+        </h3>
+
+        <p data-i18n="featureTwoText">
+          Hương chocolate đậm đà, độ chua nhẹ tự nhiên và hậu vị rang mượt mà.
+        </p>
+
+      </article>
+
+
+      <article>
+
+        <span>03</span>
+
+        <h3 data-i18n="featureThreeTitle">
+          Dễ dàng sử dụng mỗi ngày
+        </h3>
+
+        <p data-i18n="featureThreeText">
+          Pha cùng sữa, xay với đá, thêm vào yến mạch hoặc sử dụng khi làm bánh.
+        </p>
+
+      </article>
+
+    </section>
+
+
+    <!-- Cacao Ritual -->
+    <section class="ritual" id="ritual">
+
+      <div class="ritual-card ritual-visual">
+
+        <div class="cup" aria-hidden="true">
+          <div class="steam">∿</div>
+        </div>
+
+      </div>
+
+
+      <div class="ritual-card ritual-copy">
+
+        <p class="eyebrow" data-i18n="ritualEyebrow">
+          Thói quen cacao mỗi ngày
+        </p>
+
+        <h2 data-i18n="ritualTitle">
+          Uống nóng. Uống lạnh. Pha theo cách của bạn.
+        </h2>
+
+
+        <ol>
+
+          <li>
+
+            <strong data-i18n="ritualStepOneTitle">
+              10g cacao
+            </strong>
+
+            <span data-i18n="ritualStepOneText">
+              Cho khoảng hai thìa cà phê cacao vào ly.
+            </span>
+
+          </li>
+
+
+          <li>
+
+            <strong data-i18n="ritualStepTwoTitle">
+              60ml nước nóng
+            </strong>
+
+            <span data-i18n="ritualStepTwoText">
+              Khuấy hoặc đánh đều cho đến khi hỗn hợp mịn và bóng.
+            </span>
+
+          </li>
+
+
+          <li>
+
+            <strong data-i18n="ritualStepThreeTitle">
+              Hoàn thiện theo sở thích
+            </strong>
+
+            <span data-i18n="ritualStepThreeText">
+              Thêm 120–180ml sữa, chất tạo ngọt, gia vị hoặc đá.
+            </span>
+
+          </li>
+
+        </ol>
+
+      </div>
+
+    </section>
+
+
+    <!-- Product Details -->
+    <section class="details section-grid">
+
+      <div>
+
+        <p class="eyebrow" data-i18n="productDetails">
+          Thông tin sản phẩm
+        </p>
+
+        <h2 data-i18n="detailsTitle">
+          Những điều cần biết.
+        </h2>
+
+      </div>
+
+
+      <div class="spec-table">
+
+        <div>
+          <span data-i18n="ingredients">
+            Thành phần
+          </span>
+
+          <strong data-i18n="ingredientsValue">
+            100% bột cacao
+          </strong>
+        </div>
+
+
+        <div>
+          <span data-i18n="flavour">
+            Hương vị
+          </span>
+
+          <strong data-i18n="flavourValue">
+            Chocolate đen · rang thơm · cân bằng
+          </strong>
+        </div>
+
+
+        <div>
+          <span data-i18n="bestFor">
+            Phù hợp
+          </span>
+
+          <strong data-i18n="bestForValue">
+            Đồ uống · làm bánh · bữa sáng
+          </strong>
+        </div>
+
+
+        <div>
+          <span data-i18n="storage">
+            Bảo quản
+          </span>
+
+          <strong data-i18n="storageValue">
+            Nơi khô ráo, thoáng mát · đóng kín sau khi mở
+          </strong>
+        </div>
+
+
+        <div>
+          <span data-i18n="origin">
+            Xuất xứ
+          </span>
+
+          <strong data-i18n="originValue">
+            Thay bằng nguồn gốc cacao thật của bạn
+          </strong>
+        </div>
+
+
+        <div>
+          <span data-i18n="shelfLife">
+            Hạn sử dụng
+          </span>
+
+          <strong data-i18n="shelfLifeValue">
+            Thay bằng hạn sử dụng thực tế
+          </strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Quote -->
+    <section class="quote-section">
+
+      <p data-i18n="quote">
+        “Một loại cacao có hương vị của nguyên liệu thật,
+        không phải hương liệu.”
+      </p>
+
+      <span>
+        — YOUR CACAO
+      </span>
+
+    </section>
+
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="contact">
+
+      <div>
+
+        <p class="eyebrow" data-i18n="newsletterEyebrow">
+          Kết nối cùng chúng tôi
+        </p>
+
+        <h2 data-i18n="newsletterTitle">
+          Công thức, sản phẩm mới và những câu chuyện về cacao.
+        </h2>
+
+      </div>
+
+
+      <form id="newsletterForm">
+
+        <label class="sr-only" for="email" data-i18n="emailAddress">
+          Địa chỉ email
+        </label>
+
+        <input id="email" type="email" placeholder="Địa chỉ email của bạn" required />
+
+        <button type="submit">
+          <span data-i18n="join">
+            Đăng ký
+          </span>
+        </button>
+
+      </form>
+
+
+      <p class="form-message" id="formMessage" aria-live="polite"></p>
+
+    </section>
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer>
+
+    <div class="footer-brand">
+      YOUR CACAO
+    </div>
+
+
+    <div>
+
+      <strong data-i18n="footerExplore">
+        Khám phá
+      </strong>
+
+      <a href="#shop" data-i18n="navShop">
+        Sản phẩm
+      </a>
+
+      <a href="#story" data-i18n="navStory">
+        Câu chuyện
+      </a>
+
+      <a href="#ritual" data-i18n="navRitual">
+        Cách pha cacao
+      </a>
+
+    </div>
+
+
+    <div>
+
+      <strong data-i18n="footerHelp">
+        Hỗ trợ
+      </strong>
+
+      <a href="mailto:hello@yourcacao.com">
+        hello@yourcacao.com
+      </a>
+
+      <a href="#" data-i18n="shippingReturns">
+        Giao hàng & đổi trả
+      </a>
+
+      <a href="#" data-i18n="privacy">
+        Chính sách bảo mật
+      </a>
+
+    </div>
+
+
+    <div>
+
+      <strong data-i18n="footerFollow">
+        Theo dõi
+      </strong>
+
+      <a href="#">
+        Instagram
+      </a>
+
+      <a href="#">
+        TikTok
+      </a>
+
+      <a href="#">
+        Facebook
+      </a>
+
+    </div>
+
+
+    <p class="copyright">
+
+      © <span id="year"></span> YOUR CACAO.
+
+      <span data-i18n="copyrightText">
+        Hãy thay tất cả thông tin doanh nghiệp mẫu trước khi đưa website vào hoạt động.
+      </span>
+
+    </p>
+
+  </footer>
+
+
+  <!-- Cart Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+
+    <div class="cart-head">
+
+      <h2 data-i18n="yourCart">
+        Giỏ hàng của bạn
+      </h2>
+
+      <button id="closeCart" aria-label="Đóng giỏ hàng">
+        ×
+      </button>
+
+    </div>
+
+
+    <div id="cartItems" class="cart-items">
+
+      <p class="empty-cart" data-i18n="emptyCart">
+        Giỏ hàng của bạn đang trống.
+      </p>
+
+    </div>
+
+
+    <div class="cart-footer">
+
+      <div>
+
+        <span data-i18n="subtotal">
+          Tạm tính
+        </span>
+
+        <strong id="cartTotal">
+          0 ₫
+        </strong>
+
+      </div>
+
+
+      <button id="checkoutButton">
+
+        <span data-i18n="checkout">
+          Thanh toán
+        </span>
+
+      </button>
+
+
+      <small data-i18n="checkoutDemo">
+        Nút thanh toán hiện chỉ là bản demo — hãy kết nối Shopify,
+        Stripe hoặc nhà cung cấp thanh toán khác trước khi ra mắt.
+      </small>
+
+    </div>
+
+  </aside>
+
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
+```

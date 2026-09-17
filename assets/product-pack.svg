@@ -1,0 +1,19 @@
+<svg width="620" height="820" viewBox="0 0 620 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="18" stdDeviation="20" flood-opacity=".22"/></filter>
+    <linearGradient id="paper" x1="90" y1="60" x2="520" y2="760" gradientUnits="userSpaceOnUse"><stop stop-color="#F7ECD6"/><stop offset="1" stop-color="#D9C3A1"/></linearGradient>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M118 78C118 61.4 131.4 48 148 48H472C488.6 48 502 61.4 502 78L540 737C541.1 756.8 525.3 773.5 505.5 773.5H114.5C94.7 773.5 78.9 756.8 80 737L118 78Z" fill="url(#paper)"/>
+    <path d="M119 90H501" stroke="#80674F" stroke-width="4"/>
+    <path d="M132 115H488" stroke="#A98C68" stroke-width="2" stroke-dasharray="8 8"/>
+    <circle cx="310" cy="340" r="173" fill="#562817"/>
+    <circle cx="310" cy="340" r="154" stroke="#E8C08C" stroke-width="2"/>
+    <path d="M309 214C276 242 250 279 246 318C240 377 275 429 309 462C343 429 378 377 372 318C368 279 342 242 309 214Z" fill="#A85532"/>
+    <path d="M309 232V445M309 267C286 278 270 297 262 321M309 303C332 314 348 334 356 358M309 343C284 354 270 376 264 396" stroke="#F2D2A3" stroke-width="7" stroke-linecap="round"/>
+    <text x="310" y="560" text-anchor="middle" fill="#2B160E" font-family="Georgia,serif" font-size="58" font-weight="700">YOUR CACAO</text>
+    <text x="310" y="610" text-anchor="middle" fill="#8D452B" font-family="Arial,sans-serif" font-size="25" font-weight="700" letter-spacing="5">PURE CACAO</text>
+    <text x="310" y="654" text-anchor="middle" fill="#2B160E" font-family="Georgia,serif" font-size="27" font-style="italic">Balanced Roast</text>
+    <text x="310" y="710" text-anchor="middle" fill="#5D4836" font-family="Arial,sans-serif" font-size="19" letter-spacing="3">100% CACAO · 150 G</text>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Giỏ hàng — Bazan Cacao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <header class="page-head">
+      <div class="wrap"><h1>Giỏ hàng</h1></div>
+    </header>
+
+    <div class="wrap cart">
+      <div id="cart-list"></div>
+      <div id="order-wrap">
+        <h2 style="font-size:1.6rem">Thông tin nhận hàng</h2>
+        <form class="form" data-form="order" data-subject="Đơn hàng mới — Website Bazan Cacao">
+          <div class="field"><label for="o-name">Họ tên *</label><input id="o-name" name="Họ tên" required autocomplete="name"></div>
+          <div class="field"><label for="o-phone">Số điện thoại *</label><input id="o-phone" name="SĐT" type="tel" required autocomplete="tel"></div>
+          <div class="field"><label for="o-addr">Địa chỉ nhận hàng *</label><textarea id="o-addr" name="Địa chỉ" required autocomplete="street-address" style="min-height:90px"></textarea></div>
+          <div class="field"><label for="o-note">Ghi chú</label><input id="o-note" name="Ghi chú"></div>
+          <label class="check"><input type="checkbox" name="Đăng ký Hội Một Vị"> Đăng ký thành viên Hội Một Vị</label>
+          <button class="btn btn--block" type="submit">Gửi đơn hàng</button>
+          <p class="muted" style="font-size:.85rem;margin:0">Chúng tôi sẽ gọi xác nhận đơn và phí giao hàng trước khi giao.</p>
+        </form>
+        <p class="form-msg" hidden tabindex="-1">Cảm ơn bạn đã đặt hàng! Bazan Cacao sẽ gọi xác nhận trong thời gian sớm nhất.</p>
+        <div class="member" id="hoi-mot-vi">
+          <h3>Hội Một Vị</h3>
+          <p>Tích điểm cho mỗi đơn hàng và nhận quà sinh nhật từ Bazan Cacao.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

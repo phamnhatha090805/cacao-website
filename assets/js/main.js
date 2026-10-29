@@ -103,6 +103,20 @@
     });
   }
 
+  /* ---------- Contact details (from config) ---------- */
+  function contactHTML(kind) {
+    if (kind === "email" && cfg.email) return '<a href="mailto:' + cfg.email + '">' + cfg.email + "</a>";
+    if (kind === "phone" && cfg.phone) {
+      var digits = cfg.phone.replace(/\D/g, "");
+      return '<a href="tel:' + digits + '">' + esc(cfg.phone) + '</a> · <a href="https://zalo.me/' + digits + '" target="_blank" rel="noopener">Zalo</a>';
+    }
+    if (kind === "address" && cfg.address) return esc(cfg.address);
+    return "—";
+  }
+  function renderContacts() {
+    $$("[data-contact]").forEach(function (el) { el.innerHTML = contactHTML(el.dataset.contact); });
+  }
+
   /* ---------- Footer ---------- */
   function renderFooter() {
     var el = $("#site-footer");
@@ -124,9 +138,9 @@
       col("Khám phá", NAV.slice(0, 5)) +
       col("Hỗ trợ", [["lien-he.html", "Liên hệ"], ["blog.html#faq", "Câu hỏi thường gặp"], ["chinh-sach.html#giao-hang", "Giao hàng"], ["chinh-sach.html#doi-tra", "Đổi trả"], ["chinh-sach.html#bao-mat", "Bảo mật thông tin"]]) +
       '<div class="fcol fcol--contact"><h4>Liên hệ</h4>' +
-      "<p>Email: " + (cfg.email ? '<a href="mailto:' + cfg.email + '">' + cfg.email + "</a>" : "—") + "</p>" +
-      "<p>SĐT/Zalo: " + (cfg.phone || "—") + "</p>" +
-      "<p>Kho/Văn phòng: " + (cfg.address || "—") + "</p></div>" +
+      "<p>Email: " + contactHTML("email") + "</p>" +
+      "<p>SĐT/Zalo: " + contactHTML("phone") + "</p>" +
+      "<p>Kho/Văn phòng: " + contactHTML("address") + "</p></div>" +
       "</div>" +
       '<p class="footer__member">Tham gia <strong>Hội Một Vị</strong> — tích điểm, nhận quà sinh nhật. <a href="gio-hang.html#hoi-mot-vi">Tìm hiểu</a></p>' +
       '<div class="footer__bottom">© 2026 Bazan Cacao.</div>' +
@@ -395,6 +409,7 @@
   renderFooter();
   renderFab();
   renderIcons();
+  renderContacts();
   renderGrids();
   renderDetail();
   renderCartList();

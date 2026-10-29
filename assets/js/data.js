@@ -3,10 +3,10 @@
 window.BZ = {
   config: {
     // Email nhận đơn hàng, báo giá, liên hệ (CẬP NHẬT)
-    email: "",
+    email: "bazancacaoo@gmail.com",
     // Nếu dùng dịch vụ form (Formspree, Getform...), dán URL vào đây; để trống sẽ mở ứng dụng email.
     formEndpoint: "",
-    phone: "",
+    phone: "098 632 26 65",
     address: "",
     links: {
       shopee: "#",

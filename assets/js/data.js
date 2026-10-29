@@ -186,10 +186,12 @@ window.BZ = {
       steps: ["Hòa bột cacao với nước nóng cho tan hoàn toàn.", "Cho đá vào ly, rót sữa tươi.", "Rót cacao lên trên, khuấy đều khi uống."]
     },
     {
-      name: "Trà vỏ lụa cacao sữa",
-      time: "7 phút",
-      ing: ["5g trà vỏ lụa cacao", "150ml nước sôi", "50ml sữa tươi", "Mật ong (tùy chọn)"],
-      steps: ["Hãm trà với nước sôi 4–5 phút rồi lọc bỏ bã.", "Thêm sữa tươi ấm và mật ong.", "Dùng nóng, hoặc để nguội rồi thêm đá."]
+      name: "Trà vỏ lụa cacao mật ong",
+      time: "6 phút",
+      // Ảnh: Aniketh Kanukurthi / Unsplash — https://unsplash.com/photos/Qaor6nxikUM
+      img: "assets/img/tra-vo-lua.jpg",
+      ing: ["5g trà vỏ lụa cacao", "200ml nước sôi", "1–2 muỗng cà phê mật ong", "1 lát chanh (tùy chọn)"],
+      steps: ["Hãm trà với nước sôi 4–5 phút rồi lọc bỏ bã.", "Thêm mật ong khi trà còn ấm, khuấy đều.", "Dùng nóng, hoặc để nguội rồi thêm đá và lát chanh."]
     }
   ]
 };

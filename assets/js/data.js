@@ -11,8 +11,8 @@ window.BZ = {
     links: {
       shopee: "#",
       tiktok: "#",
-      facebook: "#",
-      instagram: "#"
+      facebook: "https://www.facebook.com/BazanCacao",
+      instagram: "https://www.instagram.com/bazancacao.vn"
     }
   },
 

@@ -36,7 +36,7 @@
     ["lien-he.html", "Liên hệ"]
   ];
   var SOCIAL = [
-    ["shopee", "Shopee"], ["tiktok", "TikTok Shop"], ["facebook", "Facebook"], ["instagram", "Instagram"]
+    ["facebook", "Facebook"], ["instagram", "Instagram"], ["shopee", "Shopee"], ["tiktok", "TikTok Shop"]
   ];
 
   /* ---------- Cart store (localStorage, an toàn khi bị chặn) ---------- */
@@ -83,7 +83,7 @@
     }).join("");
     el.outerHTML =
       '<header class="header"><div class="wrap header__bar">' +
-      '<a class="logo" href="index.html" aria-label="Bazan Cacao — Trang chủ"><span class="logo__mark"></span><span class="logo__text">Bazan Cacao<small>Đậm Vị Nắng Gió</small></span></a>' +
+      '<a class="logo" href="index.html" aria-label="Bazan Cacao — Trang chủ"><img class="logo__mark" src="assets/img/logo-mark.png" alt=""><img class="logo__word" src="assets/img/logo-word.png" alt="Bazan Cacao"></a>' +
       '<nav class="nav" aria-label="Menu chính">' + links + "</nav>" +
       '<div class="header__tools">' +
       '<a class="icon-btn" href="gio-hang.html" aria-label="Giỏ hàng">' + I.cart + '<span class="cart-count" hidden>0</span></a>' +
@@ -107,7 +107,7 @@
   function renderFooter() {
     var el = $("#site-footer");
     if (!el) return;
-    var socials = [["facebook", "Facebook"], ["instagram", "Instagram"], ["tiktok", "TikTok"], ["shopee", "Shopee"]].map(function (s) {
+    var socials = [["facebook", "Facebook"], ["instagram", "Instagram"], ["shopee", "Shopee"], ["tiktok", "TikTok"]].map(function (s) {
       return '<a href="' + cfg.links[s[0]] + '" aria-label="' + s[1] + '" target="_blank" rel="noopener">' + I[s[0]] + "</a>";
     }).join("");
     function col(title, items) {
@@ -117,7 +117,7 @@
     }
     el.outerHTML =
       '<footer class="footer"><div class="wrap"><div class="footer__grid">' +
-      '<div class="footer__brand"><a class="logo" href="index.html"><span class="logo__mark"></span><span class="logo__text">Bazan Cacao</span></a>' +
+      '<div class="footer__brand"><a class="logo logo--footer" href="index.html"><img class="logo__mark" src="assets/img/logo-mark-cream.png" alt=""><img class="logo__word" src="assets/img/logo-word-cream.png" alt="Bazan Cacao"></a>' +
       '<div class="footer__slogan">Đậm Vị Nắng Gió</div>' +
       "<p>Cacao nguyên bản, ít đường, từ vùng đất đỏ bazan.</p>" +
       '<div class="socials">' + socials + "</div></div>" +
@@ -283,7 +283,7 @@
     var p = product(id) || BZ.products[0];
     document.title = p.name + " — Bazan Cacao";
     var variants = p.variants.length > 1
-      ? '<fieldset class="variants"><legend>Quy cách</legend>' + p.variants.map(function (v, i) {
+      ? '<fieldset class="variants"><legend class="sr-only">Khối lượng</legend>' + p.variants.map(function (v, i) {
           return '<label class="variant"><input type="radio" name="variant" value="' + v.label + '"' + (i === 0 ? " checked" : "") + "><span>" + v.label + "</span></label>";
         }).join("") + "</fieldset>"
       : '<p class="muted">Quy cách: ' + esc(p.variants[0].label) + "</p>";

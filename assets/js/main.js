@@ -376,7 +376,10 @@
     var el = $("#recipes");
     if (!el) return;
     el.innerHTML = BZ.recipes.map(function (r, i) {
-      return '<article class="recipe"><div class="ph' + (i === 1 ? " ph--teal" : "") + '" data-label="' + esc(r.name) + '"></div>' +
+      var media = r.img
+        ? '<div class="ph ph--photo"><img src="' + r.img + '" loading="lazy" alt="' + esc(r.name) + '"></div>'
+        : '<div class="ph' + (i === 1 ? " ph--teal" : "") + '" data-label="' + esc(r.name) + '"></div>';
+      return '<article class="recipe">' + media +
         '<span class="recipe__time">' + r.time + "</span><h3>" + esc(r.name) + "</h3>" +
         "<h4>Nguyên liệu</h4><ul>" + r.ing.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" +
         "<h4>Cách làm</h4><ol>" + r.steps.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol></article>";

@@ -172,12 +172,16 @@ window.BZ = {
     {
       name: "Cacao nóng nguyên bản",
       time: "5 phút",
+      // Ảnh: Karthick Gislen / Unsplash — https://unsplash.com/photos/GHnsgYYsY8M
+      img: "assets/img/cacao-nong.jpg",
       ing: ["10g bột cacao nguyên chất", "150ml sữa tươi hoặc nước nóng", "Mật ong hoặc đường (tùy chọn)"],
       steps: ["Hòa bột cacao với 2 muỗng nước nóng cho tan thành sệt.", "Rót sữa ấm vào, khuấy đều.", "Nêm ngọt tùy khẩu vị, thưởng thức khi còn ấm."]
     },
     {
       name: "Cacao sữa đá",
       time: "5 phút",
+      // Ảnh: American Heritage Chocolate / Unsplash — https://unsplash.com/photos/e0cEh3LURnI
+      img: "assets/img/cacao-sua-da.jpg",
       ing: ["15g bột cacao nguyên chất", "30ml nước nóng", "100ml sữa tươi", "Đá viên"],
       steps: ["Hòa bột cacao với nước nóng cho tan hoàn toàn.", "Cho đá vào ly, rót sữa tươi.", "Rót cacao lên trên, khuấy đều khi uống."]
     },

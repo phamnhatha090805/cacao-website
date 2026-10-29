@@ -94,9 +94,14 @@ p { margin: 0 0 1em; }
 }
 .header__bar { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-.logo__mark { width: 18px; height: 34px; background: currentColor; -webkit-mask: url(../img/pod.svg) center/contain no-repeat; mask: url(../img/pod.svg) center/contain no-repeat; color: var(--bazan); }
-.logo__text { font: 600 1.2rem/1 var(--serif); letter-spacing: .02em; }
-.logo__text small { display: block; font: 500 .58rem/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; margin-top: 4px; opacity: .7; }
+.logo__mark { height: 46px; width: auto; }
+.logo__word { height: 32px; width: auto; }
+.logo--footer .logo__mark { height: 84px; }
+.logo--footer .logo__word { height: 52px; }
+@media (min-width: 1000px) {
+  .logo__mark { height: 56px; }
+  .logo__word { height: 38px; }
+}
 .nav { display: none; }
 .header__tools { display: flex; align-items: center; gap: 4px; }
 .icon-btn {
@@ -162,6 +167,7 @@ body.nav-open { overflow: hidden; }
 .ph--wide { aspect-ratio: 16 / 10; }
 .ph--square { aspect-ratio: 1; }
 .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ph--photo::before, .ph--photo::after { display: none; }
 
 /* Product "wrapper" illustration — placeholder for packshots */
 .pack {
@@ -208,6 +214,15 @@ a:hover .pack__box { transform: translateY(-6px) rotate(-1.5deg); }
 .hero h1 { max-width: 12ch; }
 .hero p { max-width: 42ch; font-size: 1.05rem; margin-bottom: 28px; }
 .hero--short { min-height: 62svh; }
+
+/* Home banner: designer artwork with the slogan built in */
+.banner { background: #F3E5CB; }
+.banner__img { width: 100%; height: auto; max-height: calc(100svh - var(--header-h) - 150px); object-fit: contain; }
+.banner__cta { display: flex; flex-direction: column; align-items: center; gap: 18px; padding-top: 28px; padding-bottom: 40px; text-align: center; }
+.banner__cta .quote { margin: 0; font-size: clamp(1.2rem, 4vw, 1.7rem); }
+@media (min-width: 760px) {
+  .banner__cta { flex-direction: row; justify-content: space-between; text-align: left; }
+}
 
 .page-head { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
 .page-head h1 { font-size: clamp(2.2rem, 7vw, 4rem); }
@@ -402,6 +417,13 @@ a:hover .pack__box { transform: translateY(-6px) rotate(-1.5deg); }
 .form-msg { padding: 16px; border: 1px solid currentColor; font-size: .95rem; }
 .form-msg[hidden] { display: none; }
 
+/* Designer artwork */
+.figure { display: block; position: relative; text-decoration: none; }
+.figure img { width: 100%; height: auto; box-shadow: 0 24px 48px -28px rgba(43, 0, 0, .45); }
+.figure__hint { display: block; margin-top: 10px; font-size: .8rem; color: var(--muted); text-align: center; }
+@media (min-width: 900px) { .figure__hint { display: none; } }
+.art { width: 100%; height: auto; box-shadow: 0 24px 48px -28px rgba(43, 0, 0, .45); }
+
 /* ---------- Blog ---------- */
 .recipe { border-top: 1px solid var(--line); padding-top: 24px; }
 .recipe .ph { margin-bottom: 20px; aspect-ratio: 4 / 3; }
@@ -438,8 +460,7 @@ a:hover .pack__box { transform: translateY(-6px) rotate(-1.5deg); }
 .footer { background: var(--cocoa); color: var(--cream); padding: 64px 0 24px; }
 .footer__grid { display: grid; gap: 0; }
 .footer__brand { padding-bottom: 32px; border-bottom: 1px solid var(--line-light); }
-.footer__brand .logo { color: var(--cream); margin-bottom: 18px; }
-.footer__brand .logo__mark { color: var(--cream); }
+.footer__brand .logo { margin-bottom: 18px; gap: 14px; }
 .footer__slogan { font: italic 1.6rem/1.2 var(--serif); margin-bottom: 10px; }
 .footer__brand p { font-size: .92rem; opacity: .78; max-width: 36ch; }
 .socials { display: flex; gap: 6px; margin-top: 18px; }

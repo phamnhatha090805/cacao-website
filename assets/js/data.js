@@ -7,7 +7,7 @@ window.BZ = {
     // Web3Forms: dán Access Key (nhận qua email khi tạo form trên web3forms.com) vào formKey.
     // Để trống formKey sẽ mở ứng dụng email của khách.
     formEndpoint: "https://api.web3forms.com/submit",
-    formKey: "a716cb5c-f53b-478f-a81a-56c5b2b71452",
+    formKey: "896ad7a0-e7b3-4d59-b6ed-0d3ba32de878",
     phone: "098 632 26 65",
     address: "",
     links: {

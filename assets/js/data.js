@@ -4,8 +4,10 @@ window.BZ = {
   config: {
     // Email nhận đơn hàng, báo giá, liên hệ (CẬP NHẬT)
     email: "bazancacaoo@gmail.com",
-    // Nếu dùng dịch vụ form (Formspree, Getform...), dán URL vào đây; để trống sẽ mở ứng dụng email.
-    formEndpoint: "",
+    // Web3Forms: dán Access Key (nhận qua email khi tạo form trên web3forms.com) vào formKey.
+    // Để trống formKey sẽ mở ứng dụng email của khách.
+    formEndpoint: "https://api.web3forms.com/submit",
+    formKey: "a716cb5c-f53b-478f-a81a-56c5b2b71452",
     phone: "098 632 26 65",
     address: "",
     links: {

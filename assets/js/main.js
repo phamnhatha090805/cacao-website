@@ -234,12 +234,13 @@
   /* ---------- Forms: gửi về email ---------- */
   function sendForm(subject, data) {
     var lines = Object.keys(data).map(function (k) { return k + ": " + data[k]; }).join("\n");
-    if (cfg.formEndpoint) {
+    if (cfg.formEndpoint && cfg.formKey) {
       return fetch(cfg.formEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(Object.assign({ _subject: subject }, data))
-      }).then(function (r) { if (!r.ok) throw new Error(r.status); });
+        body: JSON.stringify(Object.assign({ access_key: cfg.formKey, subject: subject, from_name: "Website Bazan Cacao" }, data))
+      }).then(function (r) { return r.json(); })
+        .then(function (res) { if (!res.success) throw new Error(res.message); });
     }
     location.href = "mailto:" + cfg.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(lines);
     return Promise.resolve();

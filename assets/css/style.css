@@ -396,10 +396,11 @@ a:hover .pack__box { transform: translateY(-6px) rotate(-1.5deg); }
 .season { display: grid; gap: 14px; }
 .season__item { position: relative; }
 .season__item .ph { aspect-ratio: 3 / 4; }
+.season__item .ph[data-label]::after { top: 12px; bottom: auto; }
 .season__cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px; color: var(--cream); background: linear-gradient(to top, rgba(43,0,0,.7), transparent); }
 .season__cap h3 { margin: 0; }
 .season__cap p { margin: 0; font-size: .85rem; opacity: .8; }
-@media (min-width: 760px) { .season { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+@media (min-width: 760px) { .season { grid-template-columns: repeat(3, 1fr); gap: 24px; } .season__item .ph { aspect-ratio: 1; } }
 
 /* ---------- B2B ---------- */
 .segments { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }

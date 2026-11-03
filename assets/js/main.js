@@ -48,7 +48,10 @@
   var CART_KEY = "bz-cart";
   var memCart = [];
   function getCart() {
-    try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { return memCart; }
+    var c;
+    try { c = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { c = memCart; }
+    // Bỏ sản phẩm đã đổi mã/ngừng bán còn sót trong giỏ cũ
+    return c.filter(function (l) { return product(l.id); });
   }
   function saveCart(c) {
     memCart = c;
@@ -279,12 +282,39 @@
   }
 
   /* ---------- Pages ---------- */
-  function cardHTML(p) {
-    var price = p.variants.length > 1 ? "Từ " + money(p.variants[0].price) : money(p.variants[0].price);
-    var size = p.variants.map(function (v) { return v.label; }).join(" · ");
-    return '<a class="card" href="san-pham-chi-tiet?id=' + p.id + '">' + packHTML(p) +
-      '<h3 class="card__name">' + esc(p.name) + '</h3><div class="card__meta"><span>' + esc(size) + '</span><span class="card__price">' + price + "</span></div></a>";
+  function fromPrice(p) {
+    return p.variants.length > 1 ? "Từ " + money(p.variants[0].price) : money(p.variants[0].price);
   }
+  function cardHTML(p) {
+    return '<div class="card"><a class="card__link" href="san-pham-chi-tiet?id=' + p.id + '">' + packHTML(p) +
+      '<h3 class="card__name">' + esc(p.name) + "</h3></a>" +
+      '<div class="card__meta"><span class="card__price">' + fromPrice(p) + "</span>" +
+      '<button type="button" class="card__add" data-add="' + p.id + '" aria-label="Thêm ' + esc(p.name) + ' vào giỏ">' + I.cart + "</button></div></div>";
+  }
+
+  // Thêm nhanh từ thẻ sản phẩm: lấy quy cách đầu tiên (nhỏ nhất)
+  var toastTimer;
+  function toast(html) {
+    var t = $(".toast");
+    if (!t) {
+      t = document.createElement("div");
+      t.className = "toast";
+      t.setAttribute("role", "status");
+      document.body.appendChild(t);
+    }
+    t.innerHTML = html;
+    t.classList.add("is-on");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("is-on"); }, 3200);
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-add]");
+    if (!b) return;
+    var p = product(b.dataset.add);
+    addToCart(p.id, p.variants[0].label, 1);
+    var v = p.variants.length > 1 ? " (" + p.variants[0].label + ")" : "";
+    toast("Đã thêm " + esc(p.name + v) + ' vào giỏ.<a href="gio-hang">Xem giỏ hàng</a>');
+  });
   function renderGrids() {
     $$("[data-products]").forEach(function (el) {
       var ids = el.dataset.products;
@@ -306,26 +336,29 @@
           return '<label class="variant"><input type="radio" name="variant" value="' + v.label + '"' + (i === 0 ? " checked" : "") + "><span>" + v.label + "</span></label>";
         }).join("") + "</fieldset>"
       : '<p class="muted">Quy cách: ' + esc(p.variants[0].label) + "</p>";
-    var info = [
-      p.contents ? ["Trong combo", p.contents] : null,
-      ["Thành phần", p.ingredients], ["Cách dùng", p.usage], ["Bảo quản", p.storage]
-    ].filter(Boolean).map(function (r, i) {
-      return "<details" + (i === 0 ? " open" : "") + "><summary>" + r[0] + "</summary><div><p>" + esc(r[1]) + "</p></div></details>";
+    var info = (p.combo
+      ? [["Trong bộ có", p.contents], ["Bảo quản", "Theo hướng dẫn của từng sản phẩm trong bộ."]]
+      : [["Thành phần", p.ingredients], ["Cách dùng", p.usage], ["Bảo quản", p.storage]]
+    ).map(function (r, i) {
+      return "<details" + (i === 0 ? " open" : "") + "><summary>" + r[0] + "</summary><div><p>" + esc(r[1]).replace(/\n/g, "<br>") + "</p></div></details>";
     }).join("");
+    var priceNote = p.variants.length > 1 ? " <small>(giá đổi theo khối lượng)</small>" : "";
+    var related = BZ.products.filter(function (x) { return x.id !== p.id && !!x.combo === !!p.combo; }).slice(0, 3);
 
     el.innerHTML =
       '<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="san-pham">Sản phẩm</a> / ' + esc(p.name) + "</nav>" +
       '<div class="pd"><div class="pd__media">' + packHTML(p) + "</div><div>" +
-      '<span class="eyebrow">' + (p.combo ? "Quà tặng" : "Một Vị, Muôn Cách") + "</span>" +
+      '<span class="eyebrow">' + esc(p.category) + "</span>" +
       "<h1>" + esc(p.name) + "</h1>" +
-      '<div class="pd__price" id="pd-price">' + money(p.variants[0].price) + "</div>" +
+      '<div class="pd__price" id="pd-price">' + fromPrice(p) + priceNote + "</div>" +
       variants +
       '<div class="pd__buy"><div class="qty"><button type="button" data-q="-1" aria-label="Giảm">−</button><input id="pd-qty" type="number" min="1" value="1" aria-label="Số lượng"><button type="button" data-q="1" aria-label="Tăng">+</button></div>' +
       '<button class="btn" id="pd-add">Thêm vào giỏ</button></div>' +
       '<p class="added" id="pd-added" hidden>Đã thêm vào giỏ. <a href="gio-hang">Xem giỏ hàng</a></p>' +
       '<div class="pd__shops"><span class="muted">Hoặc mua tại:</span><a href="' + cfg.links.shopee + '" target="_blank" rel="noopener">Shopee</a><a href="' + cfg.links.tiktok + '" target="_blank" rel="noopener">TikTok Shop</a></div>' +
       '<p class="lead">' + esc(p.desc) + "</p>" +
-      '<div class="acc">' + info + "</div></div></div></div>";
+      '<div class="acc">' + info + "</div></div></div>" +
+      '<section class="related"><h2>Có thể bạn thích</h2><div class="cards cards--3">' + related.map(cardHTML).join("") + "</div></section></div>";
 
     var qty = $("#pd-qty");
     $$("[data-q]", el).forEach(function (b) {
@@ -335,7 +368,7 @@
     $$("input[name=variant]", el).forEach(function (r) {
       r.addEventListener("change", function () {
         var v = p.variants.find(function (x) { return x.label === r.value; });
-        $("#pd-price").textContent = money(v.price);
+        $("#pd-price").innerHTML = money(v.price) + priceNote;
         $(".pack__size", el).textContent = v.label;
       });
     });

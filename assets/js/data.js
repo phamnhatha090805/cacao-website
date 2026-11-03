@@ -18,106 +18,95 @@ window.BZ = {
     }
   },
 
+  // category: dòng chữ nhỏ trên tên sản phẩm. Combo chỉ có "contents" (Trong bộ có).
   products: [
     {
       id: "bot-cacao",
+      category: "Bột cacao",
       name: "Bột cacao nguyên chất",
-      short: "Vị cacao đậm, nguyên bản từ đất đỏ bazan.",
       variants: [
         { label: "150g", price: 149000 },
         { label: "250g", price: 239000 },
         { label: "500g", price: 449000 }
       ],
       colors: ["#5E0101", "#FFF1D6"],
-      desc: "Bột cacao nguyên chất từ hạt cacao trồng trên đất đỏ bazan, giữ trọn vị đậm và hương thơm tự nhiên. Một vị nguyên bản cho muôn cách thưởng thức: pha nóng, pha đá, làm bánh hay nấu chè.",
-      ingredients: "CẬP NHẬT theo nhãn sản phẩm.",
-      usage: "Pha 2 muỗng cà phê (khoảng 10g) với 150ml nước nóng hoặc sữa ấm, khuấy đều. Thêm đá hoặc chút mật ong tùy khẩu vị.",
-      storage: "Đậy kín sau khi mở, bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp."
+      desc: "100% cacao nguyên chất, không đường. Vị đắng sâu, chua thanh nhẹ, hợp pha nóng, pha đá hay làm bánh.",
+      ingredients: "100% bột cacao nguyên chất.\nKhông dùng nếu dị ứng với thành phần trên.",
+      usage: "Gợi ý: 40g bột + 1 muỗng sữa + 100ml nước nóng, khuấy đều. Tăng giảm lượng bột, sữa hoặc đường theo khẩu vị.",
+      storage: "Nơi khô ráo, thoáng mát, nhiệt độ 18–26°C. Tránh ánh nắng trực tiếp. Đậy kín sau khi mở."
     },
     {
-      id: "socola-80",
-      name: "Socola 80% cacao",
-      short: "Đắng thanh, ít đường, tan chậm.",
+      id: "socola-85",
+      category: "Socola",
+      name: "Socola đen 85% cacao",
       variants: [{ label: "40g", price: 95000 }],
       colors: ["#1F2D13", "#FFF1D6"],
-      desc: "Thanh socola 80% cacao với vị đắng thanh, hậu vị trái cây đặc trưng của cacao vùng bazan. Ít đường, dành cho người thích vị cacao thật.",
-      ingredients: "CẬP NHẬT theo nhãn sản phẩm.",
-      usage: "Dùng trực tiếp, để tan chậm trong miệng để cảm nhận trọn tầng hương. Kết hợp cùng cà phê hoặc trà.",
-      storage: "Bảo quản ở 18–22°C, nơi khô ráo, tránh ánh nắng và nhiệt độ cao."
+      desc: "Thanh socola đen 85% cacao, ít ngọt. Đắng đậm, tan chậm, hợp nhâm nhi cùng cà phê hoặc trà.",
+      ingredients: "Hạt cacao, đường mía, bơ cacao. Hàm lượng cacao 85%.\nCó thể chứa vết các loại hạt cây. Không dùng nếu dị ứng với thành phần trên.",
+      usage: "Dùng ngay sau khi mở bao bì. Gợi ý: bẻ từng miếng nhỏ, để tan dần trên lưỡi để cảm nhận rõ vị.",
+      storage: "Nơi khô ráo, nhiệt độ 18–23°C. Tránh ánh nắng trực tiếp."
     },
     {
       id: "tra-vo-lua",
+      category: "Trà",
       name: "Trà vỏ lụa cacao",
-      short: "Hương cacao dịu nhẹ trong một tách trà.",
       variants: [{ label: "60g", price: 95000 }],
       colors: ["#8A4B2A", "#FFF1D6"],
-      desc: "Trà làm từ lớp vỏ lụa bao quanh hạt cacao, phần thường bị bỏ đi sau khi rang. Nước trà màu hổ phách, hương cacao dịu nhẹ, không caffeine đậm như cà phê.",
-      ingredients: "CẬP NHẬT theo nhãn sản phẩm.",
-      usage: "Hãm 3–5g trà với 200ml nước sôi trong 3–5 phút. Có thể pha thêm sữa hoặc mật ong.",
-      storage: "Đóng kín túi sau khi dùng, bảo quản nơi khô ráo, thoáng mát."
+      desc: "Trà làm từ lớp vỏ lụa bao quanh hạt cacao, phần thường bị bỏ đi khi chế biến. Nước trà màu hổ phách, thơm nhẹ mùi cacao, uống nóng hay lạnh đều hợp.",
+      ingredients: "Vỏ lụa hạt cacao, bột cacao và bơ cacao.\nKhông dùng nếu dị ứng với thành phần trên.",
+      usage: "Gợi ý: 3–5g trà + 200ml nước sôi khoảng 90°C, hãm 3–5 phút. Thêm mật ong hoặc chanh tùy khẩu vị.",
+      storage: "Nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp. Đóng kín túi sau khi mở để giữ hương."
     },
     {
-      id: "hat-phu-socola",
-      name: "Hạt phủ socola",
-      short: "Món nhâm nhi giòn bùi, phủ socola đậm.",
+      id: "hat-dieu-phu-socola",
+      category: "Hạt điều phủ socola",
+      name: "Hạt điều phủ socola",
       variants: [{ label: "100g", price: 120000 }],
       colors: ["#2B0000", "#E9C9A0"],
-      desc: "Hạt giòn bùi phủ lớp socola đậm vị cacao — món ăn vặt ít ngọt cho giờ trà chiều hay những buổi làm việc dài.",
-      ingredients: "CẬP NHẬT theo nhãn sản phẩm.",
-      usage: "Dùng trực tiếp. Ngon hơn khi để mát.",
-      storage: "Bảo quản nơi khô ráo, thoáng mát, dưới 25°C. Đóng kín túi sau khi mở."
+      desc: "Hạt điều giòn, bọc lớp socola đen. Món ăn vặt ít ngọt cho giờ làm việc hay những buổi trò chuyện.",
+      ingredients: "Hạt điều, socola đen.\nKhông dùng nếu dị ứng với các loại hạt hoặc thành phần trên.",
+      usage: "Dùng ngay. Ngon hơn khi để mát khoảng 10 phút trước khi ăn.",
+      storage: "Nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp. Đóng kín túi sau khi mở để hạt giữ độ giòn."
     },
     {
-      id: "combo-cacaoholic",
-      name: "Combo CacaoHolic",
+      id: "ghien-cacao",
+      category: "Quà tặng",
+      name: "Ghiền Cacao",
       combo: true,
-      short: "Dành cho người mê vị cacao đậm.",
-      variants: [{ label: "Combo", price: 399000 }],
+      variants: [{ label: "Hộp quà", price: 399000 }],
       colors: ["#5E0101", "#E9C9A0"],
-      desc: "Bộ quà dành cho người yêu vị cacao đậm đà.",
-      contents: "CẬP NHẬT sản phẩm trong combo.",
-      ingredients: "Xem thành phần từng sản phẩm trong combo.",
-      usage: "Xem hướng dẫn trên từng sản phẩm.",
-      storage: "Bảo quản nơi khô ráo, thoáng mát."
+      desc: "Hộp quà dành cho người ghiền thức uống từ cacao.",
+      contents: "Bột cacao nguyên chất 250g · Trà vỏ lụa cacao (5 gói) · Tặng 1 thìa vàng"
     },
     {
-      id: "combo-hao-vat",
-      name: "Combo Hảo Vặt",
+      id: "hao-vat",
+      category: "Quà tặng",
+      name: "Hảo Vặt",
       combo: true,
-      short: "Những món nhâm nhi ít ngọt.",
-      variants: [{ label: "Combo", price: 399000 }],
+      variants: [{ label: "Hộp quà", price: 399000 }],
       colors: ["#8A4B2A", "#2B0000"],
-      desc: "Bộ quà cho những người thích ăn vặt mà vẫn muốn ít đường.",
-      contents: "CẬP NHẬT sản phẩm trong combo.",
-      ingredients: "Xem thành phần từng sản phẩm trong combo.",
-      usage: "Xem hướng dẫn trên từng sản phẩm.",
-      storage: "Bảo quản nơi khô ráo, thoáng mát."
+      desc: "Hộp quà cho những giờ ăn vặt ít ngọt.",
+      contents: "Bột cacao nguyên chất 250g · Socola 85% cacao 40g · Tặng 1 thìa vàng"
     },
     {
-      id: "combo-nham-nhi",
-      name: "Combo Nhâm Nhi",
+      id: "nham-nhi",
+      category: "Quà tặng",
+      name: "Nhâm Nhi",
       combo: true,
-      short: "Một tách trà, một miếng socola.",
-      variants: [{ label: "Combo", price: 399000 }],
+      variants: [{ label: "Hộp quà", price: 399000 }],
       colors: ["#1F2D13", "#E9C9A0"],
-      desc: "Bộ quà cho những khoảng nghỉ chậm rãi.",
-      contents: "CẬP NHẬT sản phẩm trong combo.",
-      ingredients: "Xem thành phần từng sản phẩm trong combo.",
-      usage: "Xem hướng dẫn trên từng sản phẩm.",
-      storage: "Bảo quản nơi khô ráo, thoáng mát."
+      desc: "Hộp quà cho những buổi trà chiều thong thả.",
+      contents: "Bột cacao nguyên chất 150g · Socola 85% cacao 40g · Hạt điều phủ socola 100g"
     },
     {
-      id: "combo-tron-ven",
-      name: "Combo Trọn vẹn Cacao",
+      id: "tron-ven-cacao",
+      category: "Quà tặng",
+      name: "Trọn Vẹn Cacao",
       combo: true,
-      short: "Đủ 4 dòng sản phẩm Bazan Cacao.",
-      variants: [{ label: "Đủ 4 dòng", price: 599000 }],
+      variants: [{ label: "Hộp quà", price: 599000 }],
       colors: ["#2B0000", "#FFF1D6"],
-      desc: "Trọn bộ 4 dòng sản phẩm: bột cacao nguyên chất, socola 80% cacao, trà vỏ lụa cacao và hạt phủ socola. Một vị nguyên bản, muôn vàn trải nghiệm.",
-      contents: "Bột cacao nguyên chất · Socola 80% cacao · Trà vỏ lụa cacao · Hạt phủ socola (quy cách: CẬP NHẬT).",
-      ingredients: "Xem thành phần từng sản phẩm trong combo.",
-      usage: "Xem hướng dẫn trên từng sản phẩm.",
-      storage: "Bảo quản nơi khô ráo, thoáng mát."
+      desc: "Hộp quà trọn vẹn trải nghiệm với cacao.",
+      contents: "Bột cacao nguyên chất 150g · Trà vỏ lụa cacao (5 gói) · Socola 85% cacao 40g · Hạt điều phủ socola 100g"
     }
   ],
 
@@ -130,12 +119,12 @@ window.BZ = {
     },
     {
       q: "Pha bột cacao như thế nào cho ngon?",
-      a: "Pha 2 muỗng cà phê (khoảng 10g) với 150ml nước nóng hoặc sữa ấm, khuấy đều. Thích uống lạnh thì thêm đá. Xem thêm các công thức pha trên trang Blog.",
+      a: "Gợi ý: 40g bột + 1 muỗng sữa + 100ml nước nóng, khuấy đều, tăng giảm theo khẩu vị. Thích uống lạnh thì thêm đá. Xem thêm các công thức pha trên trang Blog.",
       k: ["pha", "cong thuc", "cach dung", "uong", "nong", "da"]
     },
     {
       q: "Bảo quản sản phẩm thế nào?",
-      a: "Đậy kín sau khi mở, để nơi khô ráo, thoáng mát, tránh ánh nắng. Socola nên giữ ở 18–22°C.",
+      a: "Đậy kín sau khi mở, để nơi khô ráo, thoáng mát, tránh ánh nắng. Socola nên giữ ở 18–23°C.",
       k: ["bao quan", "han", "han dung", "hong", "de duoc"]
     },
     {

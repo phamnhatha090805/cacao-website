@@ -138,7 +138,7 @@
       '<footer class="footer"><div class="wrap"><div class="footer__grid">' +
       '<div class="footer__brand"><a class="logo logo--footer" href="./"><img class="logo__mark" src="assets/img/logo-mark-cream.png" alt=""><img class="logo__word" src="assets/img/logo-word-cream.png" alt="Bazan Cacao"></a>' +
       '<div class="footer__slogan">Đậm Vị Nắng Gió</div>' +
-      "<p>Cacao nguyên bản, ít đường, từ vùng đất đỏ bazan.</p>" +
+      "<p>Cacao nguyên chất từ vùng đất đỏ bazan.</p>" +
       '<div class="socials">' + socials + "</div></div>" +
       col("Khám phá", NAV.slice(0, 5)) +
       col("Hỗ trợ", [["lien-he", "Liên hệ"], ["blog#faq", "Câu hỏi thường gặp"], ["chinh-sach#giao-hang", "Giao hàng"], ["chinh-sach#doi-tra", "Đổi trả"], ["chinh-sach#bao-mat", "Bảo mật thông tin"]]) +
@@ -147,7 +147,6 @@
       "<p>SĐT/Zalo: " + contactHTML("phone") + "</p>" +
       "<p>Kho/Văn phòng: " + contactHTML("address") + "</p></div>" +
       "</div>" +
-      '<p class="footer__member">Tham gia <strong>Hội Một Vị</strong> — tích điểm, nhận quà sinh nhật. <a href="gio-hang#hoi-mot-vi">Tìm hiểu</a></p>' +
       '<div class="footer__bottom">© 2026 Bazan Cacao.</div>' +
       "</div></footer>";
 

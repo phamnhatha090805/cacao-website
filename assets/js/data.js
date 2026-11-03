@@ -9,7 +9,7 @@ window.BZ = {
     formEndpoint: "https://api.web3forms.com/submit",
     formKey: "896ad7a0-e7b3-4d59-b6ed-0d3ba32de878",
     phone: "098 632 26 65",
-    address: "",
+    address: "Phường Yên Hoà, Thành phố Hà Nội",
     links: {
       shopee: "#",
       tiktok: "#",
@@ -157,11 +157,6 @@ window.BZ = {
       q: "Có quà tặng doanh nghiệp in logo không?",
       a: "Có. Quà tặng doanh nghiệp được chiết khấu 10%, 15% hoặc 20% theo số lượng và có thể in logo công ty. Gửi yêu cầu ở trang Giải pháp B2B.",
       k: ["qua", "qua tang", "logo", "chiet khau", "tet", "trung thu", "giang sinh"]
-    },
-    {
-      q: "Hội Một Vị là gì?",
-      a: "Hội Một Vị là chương trình thành viên của Bazan Cacao: tích điểm cho mỗi đơn hàng và nhận quà sinh nhật. Bạn có thể đăng ký khi đặt hàng.",
-      k: ["hoi mot vi", "thanh vien", "tich diem", "sinh nhat", "member"]
     },
     {
       q: "Workshop \"Hành Trình Một Vị\" diễn ra thế nào?",

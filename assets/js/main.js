@@ -95,7 +95,7 @@
       '<a class="logo" href="./" aria-label="Bazan Cacao — Trang chủ"><img class="logo__mark" src="assets/img/logo-mark.png" alt=""><img class="logo__word" src="assets/img/logo-word.png" alt="Bazan Cacao"></a>' +
       '<nav class="nav" aria-label="Menu chính">' + links + "</nav>" +
       '<div class="header__tools">' +
-      '<a class="icon-btn" href="gio-hang" aria-label="Giỏ hàng">' + I.cart + '<span class="cart-count" hidden>0</span></a>' +
+      '<a class="icon-btn cart-link" href="gio-hang"' + (cur === "gio-hang" ? ' aria-current="page"' : "") + '>' + I.cart + '<span class="cart-link__label">Giỏ hàng</span><span class="cart-count" hidden>0</span></a>' +
       '<button class="icon-btn menu-toggle" aria-expanded="false" aria-controls="mnav" aria-label="Mở menu">' + I.menu + "</button>" +
       "</div></div></header>" +
       '<nav class="mnav" id="mnav" aria-label="Menu">' + links +

@@ -143,11 +143,6 @@ window.BZ = {
       k: ["si", "b2b", "nhap", "doanh nghiep", "quan", "cafe", "nha hang", "khach san", "kg", "bao gia"]
     },
     {
-      q: "Có quà tặng doanh nghiệp in logo không?",
-      a: "Có. Quà tặng doanh nghiệp được chiết khấu 10%, 15% hoặc 20% theo số lượng và có thể in logo công ty. Gửi yêu cầu ở trang Giải pháp B2B.",
-      k: ["qua", "qua tang", "logo", "chiet khau", "tet", "trung thu", "giang sinh"]
-    },
-    {
       q: "Workshop \"Hành Trình Một Vị\" diễn ra thế nào?",
       a: "Workshop gồm 5 chương theo mùa, tối đa 30 chỗ mỗi buổi. Lịch các buổi sẽ được thông báo trên trang Blog và fanpage.",
       k: ["workshop", "hanh trinh", "su kien", "lop", "trai nghiem"]

@@ -432,10 +432,6 @@ a:hover .pack__box { transform: translateY(-6px) rotate(-1.5deg); }
   .steps li { grid-template-columns: 1fr; gap: 16px; }
 }
 
-.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 28px 0; }
-.tier { background: var(--cream); text-align: center; padding: 24px 8px; }
-.tier strong { display: block; font: 400 clamp(1.8rem, 6vw, 2.6rem)/1 var(--serif); color: var(--bazan); }
-.tier span { font-size: .78rem; color: var(--muted); }
 .checks { list-style: none; padding: 0; margin: 0 0 24px; }
 .checks li { padding: 8px 0 8px 28px; position: relative; }
 .checks li::before { content: ""; position: absolute; left: 2px; top: 15px; width: 12px; height: 6px; border-left: 1.5px solid var(--bazan); border-bottom: 1.5px solid var(--bazan); transform: rotate(-45deg); }

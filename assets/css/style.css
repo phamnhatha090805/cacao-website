@@ -253,11 +253,9 @@ a:hover .pack--photo img { transform: scale(1.04); }
 .hero h1 { max-width: 12ch; }
 .hero p { max-width: 42ch; font-size: 1.05rem; margin-bottom: 28px; }
 .hero--short { min-height: 62svh; }
-.hero--page { min-height: 44svh; }
+.hero--page { min-height: 62svh; }
 .hero--page h1 { margin-bottom: 12px; }
 .hero--page .hero__inner p { margin-bottom: 0; }
-.hero--thin { min-height: 32svh; }
-.hero--thin .hero__inner { padding-top: 56px; padding-bottom: 40px; }
 
 /* Home: full-screen photo, CTA on the image */
 .hero--home { min-height: calc(100svh - var(--header-h)); }

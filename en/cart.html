@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cart — Bazan Cacao</title>
+  <meta name="description" content="Your Bazan Cacao cart and delivery details.">
+  <link rel="alternate" hreflang="vi" href="https://bazancacao.vn/gio-hang">
+  <link rel="alternate" hreflang="en" href="https://bazancacao.vn/en/cart">
+  <link rel="alternate" hreflang="x-default" href="https://bazancacao.vn/gio-hang">
+  <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Calistoga&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main>
+    <header class="page-head">
+      <div class="wrap"><h1>Cart</h1></div>
+    </header>
+
+    <div class="wrap cart">
+      <div id="cart-list"></div>
+      <div id="order-wrap">
+        <h2 style="font-size:1.6rem">Delivery details</h2>
+        <form class="form" data-form="order" data-subject="Đơn hàng mới (tiếng Anh) — Website Bazan Cacao">
+          <div class="field"><label for="o-name">Full name *</label><input id="o-name" name="Họ tên" required autocomplete="name"></div>
+          <div class="field"><label for="o-phone">Phone number *</label><input id="o-phone" name="SĐT" type="tel" required autocomplete="tel"></div>
+          <div class="field"><label for="o-addr">Delivery address *</label><textarea id="o-addr" name="Địa chỉ" required autocomplete="street-address" style="min-height:90px"></textarea></div>
+          <div class="field"><label for="o-note">Notes</label><input id="o-note" name="Ghi chú"></div>
+          <input type="hidden" name="Email">
+          <button class="btn btn--block" type="submit">Place order</button>
+          <p class="muted" style="font-size:.85rem;margin:0">We currently deliver within Vietnam. We will call to confirm your order and the shipping fee before delivery.</p>
+        </form>
+        <p class="form-msg" hidden tabindex="-1">Thank you for your order! Bazan Cacao will call you to confirm as soon as possible.</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/data-en.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>

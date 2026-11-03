@@ -10,6 +10,7 @@ window.BZ = {
     formKey: "896ad7a0-e7b3-4d59-b6ed-0d3ba32de878",
     phone: "098 632 26 65",
     address: "Phường Yên Hoà, Thành phố Hà Nội",
+    addressEn: "Yen Hoa Ward, Hanoi, Vietnam",
     // Đăng nhập Google (Firebase). Dán cấu hình từ Firebase Console > Project settings > Your apps.
     // Để trống apiKey thì website không hiện nút đăng nhập. Hướng dẫn: README.md.
     firebase: {

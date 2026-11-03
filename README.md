@@ -1,7 +1,7 @@
 # cacao-website
 This is the website for the clients. The product is Bazan Cacao
 
-Static site (HTML/CSS/JS, no build step), Vietnamese only, mobile first.
+Static site (HTML/CSS/JS, no build step), Vietnamese with an English version under `en/`, mobile first.
 
 ## Run locally
 
@@ -57,3 +57,12 @@ Setup (done once, by the account that should own the customer list):
 3. Authentication → Settings → Authorized domains → add `bazancacao.vn` (and any other domain the site uses).
 4. Project settings → Your apps → Web (`</>`) → register the app → copy `apiKey`, `authDomain`,
    `projectId`, `appId` into `config.firebase`.
+
+## English version
+
+- English pages live in `en/` with English names (`en/products`, `en/about`…); the VI | EN switch in the
+  header maps each page to its counterpart (`SLUGS` in `assets/js/main.js`).
+- Header, footer, cart, chatbot and product labels: the `T` string table in `assets/js/main.js`.
+- Product texts, FAQ and recipes in English: `assets/js/data-en.js` (prices, sizes and photos come from `data.js`).
+- Any change to Vietnamese copy needs the same change in the English page or `data-en.js`.
+- Forms on English pages still email the team in Vietnamese, with a "Ngôn ngữ: Tiếng Anh" line.

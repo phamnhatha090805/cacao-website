@@ -125,6 +125,12 @@ p { margin: 0 0 1em; }
   .cart-link .cart-count { position: static; }
 }
 
+/* Language switch */
+.lang { display: inline-flex; align-items: center; height: 32px; margin-right: 4px; border: 1px solid var(--line); text-decoration: none; font: 600 .68rem/1 var(--sans); letter-spacing: .08em; }
+.lang span { padding: 0 8px; height: 100%; display: grid; place-items: center; color: var(--muted); }
+.lang span.is-on { background: var(--cocoa); color: var(--cream); }
+.lang:hover span:not(.is-on) { color: var(--ink); }
+
 /* Account (Google login) */
 .account { position: relative; }
 .account__btn.is-in::after { content: ""; position: absolute; top: 9px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }

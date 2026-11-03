@@ -1,13 +1,16 @@
-/* Bazan Cacao — header, footer, giỏ hàng, form, chatbot */
+/* Bazan Cacao — header, footer, giỏ hàng, form, chatbot (tiếng Việt + tiếng Anh) */
 (function () {
   "use strict";
   var BZ = window.BZ;
   var cfg = BZ.config;
+  var EN = document.documentElement.lang === "en";
+  // Trang tiếng Anh nằm trong /en/, nên đường dẫn tới assets cần lùi một cấp
+  var ROOT = EN ? "../" : "";
 
   /* ---------- Helpers ---------- */
   function $(sel, root) { return (root || document).querySelector(sel); }
   function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
-  function money(n) { return n.toLocaleString("vi-VN") + "đ"; }
+  function money(n) { return EN ? n.toLocaleString("en-US") + " VND" : n.toLocaleString("vi-VN") + "đ"; }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function plain(s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "d").toLowerCase(); }
   function product(id) { return BZ.products.find(function (p) { return p.id === id; }); }
@@ -17,6 +20,74 @@
   if (/\.html$/.test(location.pathname) && history.replaceState) {
     history.replaceState(null, "", location.pathname.replace(/(index)?\.html$/, "") + location.search + location.hash);
   }
+
+  /* ---------- Ngôn ngữ ---------- */
+  // Trang tiếng Việt ↔ trang tiếng Anh tương ứng
+  var SLUGS = [
+    ["./", "./"], ["san-pham", "products"], ["san-pham-chi-tiet", "product"], ["qua-tang", "gifts"],
+    ["doanh-nghiep", "business"], ["blog", "blog"], ["cau-chuyen", "about"], ["lien-he", "contact"],
+    ["gio-hang", "cart"], ["chinh-sach", "policies"]
+  ];
+  // Link nội bộ viết theo tên trang tiếng Việt; trên trang tiếng Anh đổi sang tên tiếng Anh
+  function L(href) {
+    if (!EN) return href;
+    var m = href.match(/^([^?#]*)(.*)$/);
+    var pair = SLUGS.find(function (s) { return s[0] === m[1]; });
+    return (pair ? pair[1] : m[1]) + m[2];
+  }
+  function otherLangHref() {
+    var cur = page();
+    var pair = SLUGS.find(function (s) { return s[EN ? 1 : 0] === cur; }) || SLUGS[0];
+    var target = pair[EN ? 0 : 1];
+    return (EN ? "../" : "en/") + (target === "./" ? "" : target) + location.search + location.hash;
+  }
+  var T = EN ? {
+    home: "Bazan Cacao — Home", mainMenu: "Main menu", cart: "Cart", openMenu: "Open menu", closeMenu: "Close menu",
+    menuFoot: "Đậm Vị Nắng Gió — pure cacao from red basalt soil.", lang: "Tiếng Việt",
+    tagline: "Pure cacao from the red basalt soil of Vietnam.", explore: "Explore", support: "Support", contact: "Contact",
+    faq: "FAQ", shipping: "Shipping", returns: "Returns", privacy: "Privacy", phone: "Phone/Zalo", office: "Office",
+    channels: "Shops & social media", chatOpen: "Chat with our assistant", chatName: "Bazan assistant",
+    chatSub: "Quick answers on products & orders", close: "Close", question: "Question", ask: "Type your question…", send: "Send",
+    hello: "Hi! I'm the Bazan Cacao assistant. What would you like to know about our products, brewing or ordering?",
+    noAnswer: 'I don\'t have an answer for that yet. Leave us a message on the <a href="contact">Contact page</a> and the Bazan Cacao team will reply soon.',
+    sendFail: "Could not send. Please try again or contact us on Zalo.",
+    from: "From ", add: "Add {0} to cart", added: "Added {0} to cart.", viewCart: "View cart",
+    weight: "Weight", packSize: "Pack size: ", inBox: "In the box", storage: "Storage", boxStorage: "Follow the instructions for each product in the box.",
+    ingredients: "Ingredients", usage: "How to use", photo: "Photo ", priceNote: "(price depends on weight)", products: "Products",
+    less: "Decrease", more: "Increase", qty: "Quantity", addCart: "Add to cart", addedCart: "Added to cart.", orBuy: "Or buy on:",
+    related: "You may also like", empty: "Your cart is empty.", seeProducts: "See products", remove: "Remove", subtotal: "Subtotal",
+    shipNote: "We will confirm the shipping fee when we call to confirm your order.", ing: "Ingredients", steps: "Method"
+  } : {
+    home: "Bazan Cacao — Trang chủ", mainMenu: "Menu chính", cart: "Giỏ hàng", openMenu: "Mở menu", closeMenu: "Đóng menu",
+    menuFoot: "Đậm Vị Nắng Gió — cacao nguyên bản từ đất đỏ bazan.", lang: "English",
+    tagline: "Cacao nguyên chất từ vùng đất đỏ bazan.", explore: "Khám phá", support: "Hỗ trợ", contact: "Liên hệ",
+    faq: "Câu hỏi thường gặp", shipping: "Giao hàng", returns: "Đổi trả", privacy: "Bảo mật thông tin", phone: "SĐT/Zalo", office: "Kho/Văn phòng",
+    channels: "Kênh mua hàng & mạng xã hội", chatOpen: "Trò chuyện với trợ lý", chatName: "Trợ lý Bazan",
+    chatSub: "Giải đáp nhanh về sản phẩm & đặt hàng", close: "Đóng", question: "Câu hỏi", ask: "Nhập câu hỏi…", send: "Gửi",
+    hello: "Xin chào! Mình là trợ lý của Bazan Cacao. Bạn muốn hỏi gì về sản phẩm, cách pha hay đặt hàng?",
+    noAnswer: 'Mình chưa có câu trả lời cho câu hỏi này. Bạn để lại lời nhắn ở <a href="lien-he">trang Liên hệ</a>, đội ngũ Bazan Cacao sẽ phản hồi sớm nhé.',
+    sendFail: "Chưa gửi được. Vui lòng thử lại hoặc liên hệ qua Zalo.",
+    from: "Từ ", add: "Thêm {0} vào giỏ", added: "Đã thêm {0} vào giỏ.", viewCart: "Xem giỏ hàng",
+    weight: "Khối lượng", packSize: "Quy cách: ", inBox: "Trong bộ có", storage: "Bảo quản", boxStorage: "Theo hướng dẫn của từng sản phẩm trong bộ.",
+    ingredients: "Thành phần", usage: "Cách dùng", photo: "Ảnh ", priceNote: "(giá đổi theo khối lượng)", products: "Sản phẩm",
+    less: "Giảm", more: "Tăng", qty: "Số lượng", addCart: "Thêm vào giỏ", addedCart: "Đã thêm vào giỏ.", orBuy: "Hoặc mua tại:",
+    related: "Có thể bạn thích", empty: "Giỏ hàng đang trống.", seeProducts: "Xem sản phẩm", remove: "Xóa", subtotal: "Tạm tính",
+    shipNote: "Phí giao hàng sẽ được báo khi chúng tôi gọi xác nhận đơn.", ing: "Nguyên liệu", steps: "Cách làm"
+  };
+  function fill(s, v) { return s.replace("{0}", v); }
+  // Nhãn quy cách lưu trong giỏ giữ tiếng Việt; chỉ dịch khi hiển thị
+  function vlabel(l) { return EN && l === "Hộp quà" ? "Gift box" : l; }
+
+  // Tên sản phẩm tiếng Việt cho email đơn hàng (giữ lại trước khi bản dịch ghi đè)
+  BZ.viNames = {};
+  BZ.products.forEach(function (p) { BZ.viNames[p.id] = p.name; });
+  // Trang tiếng Anh: thay nội dung sản phẩm, FAQ, công thức bằng bản dịch (assets/js/data-en.js)
+  if (EN && BZ.en) {
+    BZ.products.forEach(function (p) { Object.assign(p, BZ.en.products[p.id]); });
+    BZ.faq = BZ.en.faq;
+    BZ.recipes = BZ.en.recipes;
+  }
+  BZ.products.forEach(function (p) { if (p.images) p.images = p.images.map(function (src) { return ROOT + src; }); });
 
   var I = {
     cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
@@ -32,14 +103,10 @@
   };
   BZ.icons = I;
 
-  var NAV = [
-    ["san-pham", "Sản phẩm"],
-    ["qua-tang", "Quà tặng"],
-    ["doanh-nghiep", "Giải pháp B2B"],
-    ["blog", "Blog"],
-    ["cau-chuyen", "Về chúng tôi"],
-    ["lien-he", "Liên hệ"]
-  ];
+  var NAV = (EN
+    ? [["san-pham", "Products"], ["qua-tang", "Gifts"], ["doanh-nghiep", "B2B Solutions"], ["blog", "Blog"], ["cau-chuyen", "About us"], ["lien-he", "Contact"]]
+    : [["san-pham", "Sản phẩm"], ["qua-tang", "Quà tặng"], ["doanh-nghiep", "Giải pháp B2B"], ["blog", "Blog"], ["cau-chuyen", "Về chúng tôi"], ["lien-he", "Liên hệ"]]
+  ).map(function (n) { return [L(n[0]), n[1]]; });
   var SOCIAL = [
     ["facebook", "Facebook"], ["instagram", "Instagram"], ["shopee", "Shopee"], ["tiktok", "TikTok Shop"]
   ];
@@ -77,7 +144,7 @@
   function packHTML(p, size) {
     if (p.images) return '<div class="pack pack--photo"><img src="' + p.images[0] + '" loading="lazy" alt="' + esc(p.name) + '"></div>';
     return '<div class="pack' + (p.combo ? " pack--combo" : "") + '"><div class="pack__box" style="--c1:' + p.colors[0] + ";--c2:" + p.colors[1] + '">' +
-      '<span class="pack__brand">Bazan Cacao</span><span class="pack__name">' + esc(p.name) + '</span><span class="pack__size">' + esc(size || p.variants[0].label) + "</span></div></div>";
+      '<span class="pack__brand">Bazan Cacao</span><span class="pack__name">' + esc(p.name) + '</span><span class="pack__size">' + esc(vlabel(size || p.variants[0].label)) + "</span></div></div>";
   }
   BZ.packHTML = packHTML;
 
@@ -86,20 +153,22 @@
     var el = $("#site-header");
     if (!el) return;
     var cur = page();
-    if (cur === "san-pham-chi-tiet") cur = "san-pham";
+    if (cur === L("san-pham-chi-tiet")) cur = L("san-pham");
     var links = NAV.map(function (n) {
       return '<a href="' + n[0] + '"' + (n[0] === cur ? ' aria-current="page"' : "") + ">" + n[1] + "</a>";
     }).join("");
+    var lang = '<a class="lang" href="' + otherLangHref() + '" hreflang="' + (EN ? "vi" : "en") + '" aria-label="' + T.lang + '">' +
+      "<span" + (EN ? "" : ' class="is-on"') + ">VI</span><span" + (EN ? ' class="is-on"' : "") + ">EN</span></a>";
     el.outerHTML =
       '<header class="header"><div class="wrap header__bar">' +
-      '<a class="logo" href="./" aria-label="Bazan Cacao — Trang chủ"><img class="logo__mark" src="assets/img/logo-mark.png" alt=""><img class="logo__word" src="assets/img/logo-word.png" alt="Bazan Cacao"></a>' +
-      '<nav class="nav" aria-label="Menu chính">' + links + "</nav>" +
-      '<div class="header__tools">' +
-      '<a class="icon-btn cart-link" href="gio-hang"' + (cur === "gio-hang" ? ' aria-current="page"' : "") + '>' + I.cart + '<span class="cart-link__label">Giỏ hàng</span><span class="cart-count" hidden>0</span></a>' +
-      '<button class="icon-btn menu-toggle" aria-expanded="false" aria-controls="mnav" aria-label="Mở menu">' + I.menu + "</button>" +
+      '<a class="logo" href="./" aria-label="' + T.home + '"><img class="logo__mark" src="' + ROOT + 'assets/img/logo-mark.png" alt=""><img class="logo__word" src="' + ROOT + 'assets/img/logo-word.png" alt="Bazan Cacao"></a>' +
+      '<nav class="nav" aria-label="' + T.mainMenu + '">' + links + "</nav>" +
+      '<div class="header__tools">' + lang +
+      '<a class="icon-btn cart-link" href="' + L("gio-hang") + '"' + (cur === L("gio-hang") ? ' aria-current="page"' : "") + ">" + I.cart + '<span class="cart-link__label">' + T.cart + '</span><span class="cart-count" hidden>0</span></a>' +
+      '<button class="icon-btn menu-toggle" aria-expanded="false" aria-controls="mnav" aria-label="' + T.openMenu + '">' + I.menu + "</button>" +
       "</div></div></header>" +
       '<nav class="mnav" id="mnav" aria-label="Menu">' + links +
-      '<div class="mnav__foot muted">Đậm Vị Nắng Gió — cacao nguyên bản từ đất đỏ bazan.</div></nav>';
+      '<div class="mnav__foot muted">' + T.menuFoot + "</div></nav>";
 
     var btn = $(".menu-toggle"), mnav = $("#mnav");
     btn.addEventListener("click", function () {
@@ -107,7 +176,7 @@
       mnav.classList.toggle("is-open", open);
       document.body.classList.toggle("nav-open", open);
       btn.setAttribute("aria-expanded", open);
-      btn.setAttribute("aria-label", open ? "Đóng menu" : "Mở menu");
+      btn.setAttribute("aria-label", open ? T.closeMenu : T.openMenu);
       btn.innerHTML = open ? I.close : I.menu;
     });
   }
@@ -119,7 +188,7 @@
       var digits = cfg.phone.replace(/\D/g, "");
       return '<a href="tel:' + digits + '">' + esc(cfg.phone) + '</a> · <a href="https://zalo.me/' + digits + '" target="_blank" rel="noopener">Zalo</a>';
     }
-    if (kind === "address" && cfg.address) return esc(cfg.address);
+    if (kind === "address" && cfg.address) return esc(EN && cfg.addressEn ? cfg.addressEn : cfg.address);
     return "—";
   }
   function renderContacts() {
@@ -140,16 +209,16 @@
     }
     el.outerHTML =
       '<footer class="footer"><div class="wrap"><div class="footer__grid">' +
-      '<div class="footer__brand"><a class="logo logo--footer" href="./"><img class="logo__mark" src="assets/img/logo-mark-cream.png" alt=""><img class="logo__word" src="assets/img/logo-word-cream.png" alt="Bazan Cacao"></a>' +
+      '<div class="footer__brand"><a class="logo logo--footer" href="./"><img class="logo__mark" src="' + ROOT + 'assets/img/logo-mark-cream.png" alt=""><img class="logo__word" src="' + ROOT + 'assets/img/logo-word-cream.png" alt="Bazan Cacao"></a>' +
       '<div class="footer__slogan">Đậm Vị Nắng Gió</div>' +
-      "<p>Cacao nguyên chất từ vùng đất đỏ bazan.</p>" +
+      "<p>" + T.tagline + "</p>" +
       '<div class="socials">' + socials + "</div></div>" +
-      col("Khám phá", NAV.slice(0, 5)) +
-      col("Hỗ trợ", [["lien-he", "Liên hệ"], ["blog#faq", "Câu hỏi thường gặp"], ["chinh-sach#giao-hang", "Giao hàng"], ["chinh-sach#doi-tra", "Đổi trả"], ["chinh-sach#bao-mat", "Bảo mật thông tin"]]) +
-      '<div class="fcol fcol--contact"><h4>Liên hệ</h4>' +
+      col(T.explore, NAV.slice(0, 5)) +
+      col(T.support, [[L("lien-he"), T.contact], [L("blog#faq"), T.faq], [L("chinh-sach#giao-hang"), T.shipping], [L("chinh-sach#doi-tra"), T.returns], [L("chinh-sach#bao-mat"), T.privacy]]) +
+      '<div class="fcol fcol--contact"><h4>' + T.contact + "</h4>" +
       "<p>Email: " + contactHTML("email") + "</p>" +
-      "<p>SĐT/Zalo: " + contactHTML("phone") + "</p>" +
-      "<p>Kho/Văn phòng: " + contactHTML("address") + "</p></div>" +
+      "<p>" + T.phone + ": " + contactHTML("phone") + "</p>" +
+      "<p>" + T.office + ": " + contactHTML("address") + "</p></div>" +
       "</div>" +
       '<div class="footer__bottom">© 2026 Bazan Cacao.</div>' +
       "</div></footer>";
@@ -169,13 +238,13 @@
     var wrap = document.createElement("div");
     wrap.innerHTML =
       '<div class="fab"><div class="fab__social" id="fab-social" hidden>' + social + "</div>" +
-      '<button class="fab__btn" aria-expanded="false" aria-controls="fab-social" aria-label="Kênh mua hàng & mạng xã hội">' + I.share + "</button>" +
-      '<button class="fab__btn fab__btn--chat" aria-expanded="false" aria-controls="chat" aria-label="Trò chuyện với trợ lý">' + I.chat + "</button></div>" +
-      '<section class="chat" id="chat" hidden aria-label="Trợ lý Bazan Cacao">' +
-      '<div class="chat__head"><div><strong>Trợ lý Bazan</strong><small>Giải đáp nhanh về sản phẩm & đặt hàng</small></div>' +
-      '<button class="icon-btn" data-close aria-label="Đóng">' + I.close + "</button></div>" +
+      '<button class="fab__btn" aria-expanded="false" aria-controls="fab-social" aria-label="' + T.channels + '">' + I.share + "</button>" +
+      '<button class="fab__btn fab__btn--chat" aria-expanded="false" aria-controls="chat" aria-label="' + T.chatOpen + '">' + I.chat + "</button></div>" +
+      '<section class="chat" id="chat" hidden aria-label="' + T.chatName + '">' +
+      '<div class="chat__head"><div><strong>' + T.chatName + "</strong><small>" + T.chatSub + "</small></div>" +
+      '<button class="icon-btn" data-close aria-label="' + T.close + '">' + I.close + "</button></div>" +
       '<div class="chat__body" aria-live="polite"></div>' +
-      '<form class="chat__form"><label class="sr-only" for="chat-in">Câu hỏi</label><input id="chat-in" autocomplete="off" placeholder="Nhập câu hỏi…"><button aria-label="Gửi">' + I.send + "</button></form></section>";
+      '<form class="chat__form"><label class="sr-only" for="chat-in">' + T.question + '</label><input id="chat-in" autocomplete="off" placeholder="' + T.ask + '"><button aria-label="' + T.send + '">' + I.send + "</button></form></section>";
     document.body.appendChild(wrap);
 
     var btns = $$(".fab__btn", wrap), list = $("#fab-social"), chat = $("#chat"), body = $(".chat__body", chat);
@@ -211,7 +280,7 @@
         if (s > score) { score = s; best = f; }
       });
       if (best) return esc(best.a);
-      return 'Mình chưa có câu trả lời cho câu hỏi này. Bạn để lại lời nhắn ở <a href="lien-he">trang Liên hệ</a>, đội ngũ Bazan Cacao sẽ phản hồi sớm nhé.';
+      return T.noAnswer;
     }
     function ask(q) {
       say(esc(q), "me");
@@ -223,7 +292,7 @@
       btns[1].setAttribute("aria-expanded", open);
       if (open && !started) {
         started = true;
-        say("Xin chào! Mình là trợ lý của Bazan Cacao. Bạn muốn hỏi gì về sản phẩm, cách pha hay đặt hàng?", "bot");
+        say(T.hello, "bot");
         chips();
       }
       if (open) $("#chat-in").focus();
@@ -239,7 +308,7 @@
     });
   }
 
-  /* ---------- Forms: gửi về email ---------- */
+  /* ---------- Forms: gửi về email (nội dung email luôn bằng tiếng Việt cho đội ngũ) ---------- */
   function sendForm(subject, data) {
     var lines = Object.keys(data).map(function (k) { return k + ": " + data[k]; }).join("\n");
     if (cfg.formEndpoint && cfg.formKey) {
@@ -262,11 +331,15 @@
           if (i.type === "checkbox") { if (i.checked) data[i.name] = "Có"; }
           else if (i.value.trim()) data[i.name] = i.value.trim();
         });
+        if (EN) data["Ngôn ngữ"] = "Tiếng Anh (khách đặt từ trang tiếng Anh)";
         if (f.dataset.form === "order") {
           var c = getCart();
           if (!c.length) return;
-          data["Đơn hàng"] = c.map(function (l) { return product(l.id).name + " (" + l.v + ") x" + l.q + " = " + money(linePrice(l)); }).join("; ");
-          data["Tổng"] = money(c.reduce(function (s, l) { return s + linePrice(l); }, 0));
+          data["Đơn hàng"] = c.map(function (l) {
+            var v = product(l.id).variants.find(function (x) { return x.label === l.v; });
+            return BZ.viNames[l.id] + " (" + l.v + ") x" + l.q + " = " + (v.price * l.q).toLocaleString("vi-VN") + "đ";
+          }).join("; ");
+          data["Tổng"] = c.reduce(function (s, l) { return s + linePrice(l); }, 0).toLocaleString("vi-VN") + "đ";
         }
         var btn = $("button[type=submit]", f), msg = $(".form-msg", f.parentNode);
         btn.disabled = true;
@@ -276,7 +349,7 @@
           if (f.dataset.form === "order") { saveCart([]); renderCartList(); }
         }).catch(function () {
           btn.disabled = false;
-          alert("Chưa gửi được. Vui lòng thử lại hoặc liên hệ qua Zalo.");
+          alert(T.sendFail);
         });
       });
     });
@@ -284,13 +357,13 @@
 
   /* ---------- Pages ---------- */
   function fromPrice(p) {
-    return p.variants.length > 1 ? "Từ " + money(p.variants[0].price) : money(p.variants[0].price);
+    return p.variants.length > 1 ? T.from + money(p.variants[0].price) : money(p.variants[0].price);
   }
   function cardHTML(p) {
-    return '<div class="card"><a class="card__link" href="san-pham-chi-tiet?id=' + p.id + '">' + packHTML(p) +
+    return '<div class="card"><a class="card__link" href="' + L("san-pham-chi-tiet") + "?id=" + p.id + '">' + packHTML(p) +
       '<h3 class="card__name">' + esc(p.name) + "</h3></a>" +
       '<div class="card__meta"><span class="card__price">' + fromPrice(p) + "</span>" +
-      '<button type="button" class="card__add" data-add="' + p.id + '" aria-label="Thêm ' + esc(p.name) + ' vào giỏ">' + I.cart + "</button></div></div>";
+      '<button type="button" class="card__add" data-add="' + p.id + '" aria-label="' + esc(fill(T.add, p.name)) + '">' + I.cart + "</button></div></div>";
   }
 
   // Thêm nhanh từ thẻ sản phẩm: lấy quy cách đầu tiên (nhỏ nhất)
@@ -314,7 +387,7 @@
     var p = product(b.dataset.add);
     addToCart(p.id, p.variants[0].label, 1);
     var v = p.variants.length > 1 ? " (" + p.variants[0].label + ")" : "";
-    toast("Đã thêm " + esc(p.name + v) + ' vào giỏ.<a href="gio-hang">Xem giỏ hàng</a>');
+    toast(fill(T.added, esc(p.name + v)) + '<a href="' + L("gio-hang") + '">' + T.viewCart + "</a>");
   });
   function renderGrids() {
     $$("[data-products]").forEach(function (el) {
@@ -333,38 +406,39 @@
     var p = product(id) || BZ.products[0];
     document.title = p.name + " — Bazan Cacao";
     var variants = p.variants.length > 1
-      ? '<fieldset class="variants"><legend class="sr-only">Khối lượng</legend>' + p.variants.map(function (v, i) {
+      ? '<fieldset class="variants"><legend class="sr-only">' + T.weight + "</legend>" + p.variants.map(function (v, i) {
           return '<label class="variant"><input type="radio" name="variant" value="' + v.label + '"' + (i === 0 ? " checked" : "") + "><span>" + v.label + "</span></label>";
         }).join("") + "</fieldset>"
-      : '<p class="muted">Quy cách: ' + esc(p.variants[0].label) + "</p>";
+      : '<p class="muted">' + T.packSize + esc(vlabel(p.variants[0].label)) + "</p>";
     var info = (p.combo
-      ? [["Trong bộ có", p.contents], ["Bảo quản", "Theo hướng dẫn của từng sản phẩm trong bộ."]]
-      : [["Thành phần", p.ingredients], ["Cách dùng", p.usage], ["Bảo quản", p.storage]]
+      ? [[T.inBox, p.contents], [T.storage, T.boxStorage]]
+      : [[T.ingredients, p.ingredients], [T.usage, p.usage], [T.storage, p.storage]]
     ).map(function (r, i) {
       return "<details" + (i === 0 ? " open" : "") + "><summary>" + r[0] + "</summary><div><p>" + esc(r[1]).replace(/\n/g, "<br>") + "</p></div></details>";
     }).join("");
     var thumbs = p.images && p.images.length > 1
       ? '<div class="thumbs">' + p.images.map(function (src, i) {
-          return '<button type="button" data-img="' + src + '"' + (i === 0 ? ' aria-current="true"' : "") + ' aria-label="Ảnh ' + (i + 1) + '"><img src="' + src + '" alt=""></button>';
+          return '<button type="button" data-img="' + src + '"' + (i === 0 ? ' aria-current="true"' : "") + ' aria-label="' + T.photo + (i + 1) + '"><img src="' + src + '" alt=""></button>';
         }).join("") + "</div>"
       : "";
-    var priceNote = p.variants.length > 1 ? " <small>(giá đổi theo khối lượng)</small>" : "";
+    var priceNote = p.variants.length > 1 ? " <small>" + T.priceNote + "</small>" : "";
     var related = BZ.products.filter(function (x) { return x.id !== p.id && !!x.combo === !!p.combo; }).slice(0, 3);
+    var cart = L("gio-hang");
 
     el.innerHTML =
-      '<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="san-pham">Sản phẩm</a> / ' + esc(p.name) + "</nav>" +
+      '<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="' + L("san-pham") + '">' + T.products + "</a> / " + esc(p.name) + "</nav>" +
       '<div class="pd"><div class="pd__media">' + packHTML(p) + thumbs + "</div><div>" +
       '<span class="eyebrow">' + esc(p.category) + "</span>" +
       "<h1>" + esc(p.name) + "</h1>" +
       '<div class="pd__price" id="pd-price">' + fromPrice(p) + priceNote + "</div>" +
       variants +
-      '<div class="pd__buy"><div class="qty"><button type="button" data-q="-1" aria-label="Giảm">−</button><input id="pd-qty" type="number" min="1" value="1" aria-label="Số lượng"><button type="button" data-q="1" aria-label="Tăng">+</button></div>' +
-      '<button class="btn" id="pd-add">Thêm vào giỏ</button></div>' +
-      '<p class="added" id="pd-added" hidden>Đã thêm vào giỏ. <a href="gio-hang">Xem giỏ hàng</a></p>' +
-      '<div class="pd__shops"><span class="muted">Hoặc mua tại:</span><a href="' + cfg.links.shopee + '" target="_blank" rel="noopener">Shopee</a><a href="' + cfg.links.tiktok + '" target="_blank" rel="noopener">TikTok Shop</a></div>' +
+      '<div class="pd__buy"><div class="qty"><button type="button" data-q="-1" aria-label="' + T.less + '">−</button><input id="pd-qty" type="number" min="1" value="1" aria-label="' + T.qty + '"><button type="button" data-q="1" aria-label="' + T.more + '">+</button></div>' +
+      '<button class="btn" id="pd-add">' + T.addCart + "</button></div>" +
+      '<p class="added" id="pd-added" hidden>' + T.addedCart + ' <a href="' + cart + '">' + T.viewCart + "</a></p>" +
+      '<div class="pd__shops"><span class="muted">' + T.orBuy + '</span><a href="' + cfg.links.shopee + '" target="_blank" rel="noopener">Shopee</a><a href="' + cfg.links.tiktok + '" target="_blank" rel="noopener">TikTok Shop</a></div>' +
       '<p class="lead">' + esc(p.desc) + "</p>" +
       '<div class="acc">' + info + "</div></div></div>" +
-      '<section class="related"><h2>Có thể bạn thích</h2><div class="cards cards--3">' + related.map(cardHTML).join("") + "</div></section></div>";
+      '<section class="related"><h2>' + T.related + '</h2><div class="cards cards--3">' + related.map(cardHTML).join("") + "</div></section></div>";
 
     var qty = $("#pd-qty");
     $$("[data-q]", el).forEach(function (b) {
@@ -398,7 +472,7 @@
     var c = getCart();
     var form = $("#order-wrap");
     if (!c.length) {
-      el.innerHTML = '<div class="empty"><p class="quote">Giỏ hàng đang trống.</p><a class="link" href="san-pham">Xem sản phẩm</a></div>';
+      el.innerHTML = '<div class="empty"><p class="quote">' + T.empty + '</p><a class="link" href="' + L("san-pham") + '">' + T.seeProducts + "</a></div>";
       if (form && !$(".form-msg:not([hidden])", form)) form.hidden = true;
       return;
     }
@@ -408,12 +482,12 @@
       var p = product(l.id); if (!p) return "";
       var lp = linePrice(l); total += lp;
       return '<li class="cart-item">' + packHTML(p, l.v) +
-        '<div><h3><a href="san-pham-chi-tiet?id=' + p.id + '">' + esc(p.name) + '</a></h3><div class="cart-item__meta">' + esc(l.v) + " · " + money(lp / l.q) + "</div></div>" +
-        '<div class="cart-item__right"><div class="qty"><button type="button" data-i="' + i + '" data-d="-1" aria-label="Giảm">−</button><input value="' + l.q + '" readonly aria-label="Số lượng"><button type="button" data-i="' + i + '" data-d="1" aria-label="Tăng">+</button></div>' +
-        '<strong>' + money(lp) + '</strong><button class="remove" data-rm="' + i + '">Xóa</button></div></li>';
+        '<div><h3><a href="' + L("san-pham-chi-tiet") + "?id=" + p.id + '">' + esc(p.name) + '</a></h3><div class="cart-item__meta">' + esc(vlabel(l.v)) + " · " + money(lp / l.q) + "</div></div>" +
+        '<div class="cart-item__right"><div class="qty"><button type="button" data-i="' + i + '" data-d="-1" aria-label="' + T.less + '">−</button><input value="' + l.q + '" readonly aria-label="' + T.qty + '"><button type="button" data-i="' + i + '" data-d="1" aria-label="' + T.more + '">+</button></div>' +
+        "<strong>" + money(lp) + '</strong><button class="remove" data-rm="' + i + '">' + T.remove + "</button></div></li>";
     }).join("") + "</ul>" +
-      '<div class="cart-total"><span>Tạm tính</span><span>' + money(total) + "</span></div>" +
-      '<p class="muted" style="font-size:.88rem">Phí giao hàng sẽ được báo khi chúng tôi gọi xác nhận đơn.</p>';
+      '<div class="cart-total"><span>' + T.subtotal + "</span><span>" + money(total) + "</span></div>" +
+      '<p class="muted" style="font-size:.88rem">' + T.shipNote + "</p>";
 
     $$("[data-d]", el).forEach(function (b) {
       b.addEventListener("click", function () {
@@ -443,12 +517,12 @@
     if (!el) return;
     el.innerHTML = BZ.recipes.map(function (r, i) {
       var media = r.img
-        ? '<div class="ph ph--photo"><img src="' + r.img + '" loading="lazy" alt="' + esc(r.name) + '"></div>'
+        ? '<div class="ph ph--photo"><img src="' + ROOT + r.img + '" loading="lazy" alt="' + esc(r.name) + '"></div>'
         : '<div class="ph' + (i === 1 ? " ph--teal" : "") + '" data-label="' + esc(r.name) + '"></div>';
       return '<article class="recipe">' + media +
         '<span class="recipe__time">' + r.time + "</span><h3>" + esc(r.name) + "</h3>" +
-        "<h4>Nguyên liệu</h4><ul>" + r.ing.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" +
-        "<h4>Cách làm</h4><ol>" + r.steps.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol></article>";
+        "<h4>" + T.ing + "</h4><ul>" + r.ing.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" +
+        "<h4>" + T.steps + "</h4><ol>" + r.steps.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol></article>";
     }).join("");
   }
 

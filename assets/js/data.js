@@ -14,10 +14,10 @@ window.BZ = {
     // Đăng nhập Google (Firebase). Dán cấu hình từ Firebase Console > Project settings > Your apps.
     // Để trống apiKey thì website không hiện nút đăng nhập. Hướng dẫn: README.md.
     firebase: {
-      apiKey: "",
-      authDomain: "",
-      projectId: "",
-      appId: ""
+      apiKey: "AIzaSyBBLZXGuAMLdjmkVh9o2KHKDQ-Re_Ia1Uk",
+      authDomain: "bazancacao-dffcb.firebaseapp.com",
+      projectId: "bazancacao-dffcb",
+      appId: "1:995697493528:web:b7d27e4044307aaf83a56d"
     },
     links: {
       shopee: "#",

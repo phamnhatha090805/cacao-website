@@ -42,3 +42,18 @@ Products, prices, FAQ (shared with the chatbot) and recipes live in `assets/js/d
 - Search for `CẬP NHẬT` to find content still to be supplied (ingredients, combo contents,
   discount thresholds, workshop chapters, team, policies, full origin story from report Chapter 1–2).
 - Chatbot is keyword-matched against the FAQ; swap `answer()` in `main.js` for a real AI backend later.
+
+## Google login (Firebase)
+
+The header shows a sign-in button only once `config.firebase` in `assets/js/data.js` is filled in.
+Signing in pre-fills name, phone and email on the order form. There is no database: Firebase keeps
+the list of users (name, email), the phone number stays in the visitor's browser, and orders still
+arrive by email.
+
+Setup (done once, by the account that should own the customer list):
+
+1. https://console.firebase.google.com → Add project (Google Analytics not needed).
+2. Build → Authentication → Get started → Sign-in method → Google → Enable → set the support email.
+3. Authentication → Settings → Authorized domains → add `bazancacao.vn` (and any other domain the site uses).
+4. Project settings → Your apps → Web (`</>`) → register the app → copy `apiKey`, `authDomain`,
+   `projectId`, `appId` into `config.firebase`.

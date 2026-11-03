@@ -218,6 +218,8 @@ a:hover .pack__box { transform: translateY(-6px) rotate(-1.5deg); }
 .hero--page { min-height: 44svh; }
 .hero--page h1 { margin-bottom: 12px; }
 .hero--page .hero__inner p { margin-bottom: 0; }
+.hero--thin { min-height: 32svh; }
+.hero--thin .hero__inner { padding-top: 56px; padding-bottom: 40px; }
 
 /* Home: full-screen photo, CTA on the image */
 .hero--home { min-height: calc(100svh - var(--header-h)); }

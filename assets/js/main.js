@@ -11,7 +11,12 @@
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function plain(s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "d").toLowerCase(); }
   function product(id) { return BZ.products.find(function (p) { return p.id === id; }); }
-  function page() { var f = location.pathname.split("/").pop(); return f || "index.html"; }
+  function page() { var f = location.pathname.split("/").pop().replace(/\.html$/, ""); return f && f !== "index" ? f : "./"; }
+
+  // Link cũ có đuôi .html (bookmark, Facebook, Google) vẫn mở được; chỉ làm gọn địa chỉ trên thanh URL
+  if (/\.html$/.test(location.pathname) && history.replaceState) {
+    history.replaceState(null, "", location.pathname.replace(/(index)?\.html$/, "") + location.search + location.hash);
+  }
 
   var I = {
     cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
@@ -28,12 +33,12 @@
   BZ.icons = I;
 
   var NAV = [
-    ["san-pham.html", "Sản phẩm"],
-    ["qua-tang.html", "Quà tặng"],
-    ["doanh-nghiep.html", "Giải pháp B2B"],
-    ["blog.html", "Blog"],
-    ["cau-chuyen.html", "Về chúng tôi"],
-    ["lien-he.html", "Liên hệ"]
+    ["san-pham", "Sản phẩm"],
+    ["qua-tang", "Quà tặng"],
+    ["doanh-nghiep", "Giải pháp B2B"],
+    ["blog", "Blog"],
+    ["cau-chuyen", "Về chúng tôi"],
+    ["lien-he", "Liên hệ"]
   ];
   var SOCIAL = [
     ["facebook", "Facebook"], ["instagram", "Instagram"], ["shopee", "Shopee"], ["tiktok", "TikTok Shop"]
@@ -77,16 +82,16 @@
     var el = $("#site-header");
     if (!el) return;
     var cur = page();
-    if (cur === "san-pham-chi-tiet.html") cur = "san-pham.html";
+    if (cur === "san-pham-chi-tiet") cur = "san-pham";
     var links = NAV.map(function (n) {
       return '<a href="' + n[0] + '"' + (n[0] === cur ? ' aria-current="page"' : "") + ">" + n[1] + "</a>";
     }).join("");
     el.outerHTML =
       '<header class="header"><div class="wrap header__bar">' +
-      '<a class="logo" href="index.html" aria-label="Bazan Cacao — Trang chủ"><img class="logo__mark" src="assets/img/logo-mark.png" alt=""><img class="logo__word" src="assets/img/logo-word.png" alt="Bazan Cacao"></a>' +
+      '<a class="logo" href="./" aria-label="Bazan Cacao — Trang chủ"><img class="logo__mark" src="assets/img/logo-mark.png" alt=""><img class="logo__word" src="assets/img/logo-word.png" alt="Bazan Cacao"></a>' +
       '<nav class="nav" aria-label="Menu chính">' + links + "</nav>" +
       '<div class="header__tools">' +
-      '<a class="icon-btn" href="gio-hang.html" aria-label="Giỏ hàng">' + I.cart + '<span class="cart-count" hidden>0</span></a>' +
+      '<a class="icon-btn" href="gio-hang" aria-label="Giỏ hàng">' + I.cart + '<span class="cart-count" hidden>0</span></a>' +
       '<button class="icon-btn menu-toggle" aria-expanded="false" aria-controls="mnav" aria-label="Mở menu">' + I.menu + "</button>" +
       "</div></div></header>" +
       '<nav class="mnav" id="mnav" aria-label="Menu">' + links +
@@ -131,18 +136,18 @@
     }
     el.outerHTML =
       '<footer class="footer"><div class="wrap"><div class="footer__grid">' +
-      '<div class="footer__brand"><a class="logo logo--footer" href="index.html"><img class="logo__mark" src="assets/img/logo-mark-cream.png" alt=""><img class="logo__word" src="assets/img/logo-word-cream.png" alt="Bazan Cacao"></a>' +
+      '<div class="footer__brand"><a class="logo logo--footer" href="./"><img class="logo__mark" src="assets/img/logo-mark-cream.png" alt=""><img class="logo__word" src="assets/img/logo-word-cream.png" alt="Bazan Cacao"></a>' +
       '<div class="footer__slogan">Đậm Vị Nắng Gió</div>' +
       "<p>Cacao nguyên bản, ít đường, từ vùng đất đỏ bazan.</p>" +
       '<div class="socials">' + socials + "</div></div>" +
       col("Khám phá", NAV.slice(0, 5)) +
-      col("Hỗ trợ", [["lien-he.html", "Liên hệ"], ["blog.html#faq", "Câu hỏi thường gặp"], ["chinh-sach.html#giao-hang", "Giao hàng"], ["chinh-sach.html#doi-tra", "Đổi trả"], ["chinh-sach.html#bao-mat", "Bảo mật thông tin"]]) +
+      col("Hỗ trợ", [["lien-he", "Liên hệ"], ["blog#faq", "Câu hỏi thường gặp"], ["chinh-sach#giao-hang", "Giao hàng"], ["chinh-sach#doi-tra", "Đổi trả"], ["chinh-sach#bao-mat", "Bảo mật thông tin"]]) +
       '<div class="fcol fcol--contact"><h4>Liên hệ</h4>' +
       "<p>Email: " + contactHTML("email") + "</p>" +
       "<p>SĐT/Zalo: " + contactHTML("phone") + "</p>" +
       "<p>Kho/Văn phòng: " + contactHTML("address") + "</p></div>" +
       "</div>" +
-      '<p class="footer__member">Tham gia <strong>Hội Một Vị</strong> — tích điểm, nhận quà sinh nhật. <a href="gio-hang.html#hoi-mot-vi">Tìm hiểu</a></p>' +
+      '<p class="footer__member">Tham gia <strong>Hội Một Vị</strong> — tích điểm, nhận quà sinh nhật. <a href="gio-hang#hoi-mot-vi">Tìm hiểu</a></p>' +
       '<div class="footer__bottom">© 2026 Bazan Cacao.</div>' +
       "</div></footer>";
 
@@ -203,7 +208,7 @@
         if (s > score) { score = s; best = f; }
       });
       if (best) return esc(best.a);
-      return 'Mình chưa có câu trả lời cho câu hỏi này. Bạn để lại lời nhắn ở <a href="lien-he.html">trang Liên hệ</a>, đội ngũ Bazan Cacao sẽ phản hồi sớm nhé.';
+      return 'Mình chưa có câu trả lời cho câu hỏi này. Bạn để lại lời nhắn ở <a href="lien-he">trang Liên hệ</a>, đội ngũ Bazan Cacao sẽ phản hồi sớm nhé.';
     }
     function ask(q) {
       say(esc(q), "me");
@@ -278,7 +283,7 @@
   function cardHTML(p) {
     var price = p.variants.length > 1 ? "Từ " + money(p.variants[0].price) : money(p.variants[0].price);
     var size = p.variants.map(function (v) { return v.label; }).join(" · ");
-    return '<a class="card" href="san-pham-chi-tiet.html?id=' + p.id + '">' + packHTML(p) +
+    return '<a class="card" href="san-pham-chi-tiet?id=' + p.id + '">' + packHTML(p) +
       '<h3 class="card__name">' + esc(p.name) + '</h3><div class="card__meta"><span>' + esc(size) + '</span><span class="card__price">' + price + "</span></div></a>";
   }
   function renderGrids() {
@@ -310,7 +315,7 @@
     }).join("");
 
     el.innerHTML =
-      '<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="san-pham.html">Sản phẩm</a> / ' + esc(p.name) + "</nav>" +
+      '<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="san-pham">Sản phẩm</a> / ' + esc(p.name) + "</nav>" +
       '<div class="pd"><div class="pd__media">' + packHTML(p) + "</div><div>" +
       '<span class="eyebrow">' + (p.combo ? "Quà tặng" : "Một Vị, Muôn Cách") + "</span>" +
       "<h1>" + esc(p.name) + "</h1>" +
@@ -318,7 +323,7 @@
       variants +
       '<div class="pd__buy"><div class="qty"><button type="button" data-q="-1" aria-label="Giảm">−</button><input id="pd-qty" type="number" min="1" value="1" aria-label="Số lượng"><button type="button" data-q="1" aria-label="Tăng">+</button></div>' +
       '<button class="btn" id="pd-add">Thêm vào giỏ</button></div>' +
-      '<p class="added" id="pd-added" hidden>Đã thêm vào giỏ. <a href="gio-hang.html">Xem giỏ hàng</a></p>' +
+      '<p class="added" id="pd-added" hidden>Đã thêm vào giỏ. <a href="gio-hang">Xem giỏ hàng</a></p>' +
       '<div class="pd__shops"><span class="muted">Hoặc mua tại:</span><a href="' + cfg.links.shopee + '" target="_blank" rel="noopener">Shopee</a><a href="' + cfg.links.tiktok + '" target="_blank" rel="noopener">TikTok Shop</a></div>' +
       '<p class="lead">' + esc(p.desc) + "</p>" +
       '<div class="acc">' + info + "</div></div></div></div>";
@@ -347,7 +352,7 @@
     var c = getCart();
     var form = $("#order-wrap");
     if (!c.length) {
-      el.innerHTML = '<div class="empty"><p class="quote">Giỏ hàng đang trống.</p><a class="link" href="san-pham.html">Xem sản phẩm</a></div>';
+      el.innerHTML = '<div class="empty"><p class="quote">Giỏ hàng đang trống.</p><a class="link" href="san-pham">Xem sản phẩm</a></div>';
       if (form && !$(".form-msg:not([hidden])", form)) form.hidden = true;
       return;
     }
@@ -357,7 +362,7 @@
       var p = product(l.id); if (!p) return "";
       var lp = linePrice(l); total += lp;
       return '<li class="cart-item">' + packHTML(p, l.v) +
-        '<div><h3><a href="san-pham-chi-tiet.html?id=' + p.id + '">' + esc(p.name) + '</a></h3><div class="cart-item__meta">' + esc(l.v) + " · " + money(lp / l.q) + "</div></div>" +
+        '<div><h3><a href="san-pham-chi-tiet?id=' + p.id + '">' + esc(p.name) + '</a></h3><div class="cart-item__meta">' + esc(l.v) + " · " + money(lp / l.q) + "</div></div>" +
         '<div class="cart-item__right"><div class="qty"><button type="button" data-i="' + i + '" data-d="-1" aria-label="Giảm">−</button><input value="' + l.q + '" readonly aria-label="Số lượng"><button type="button" data-i="' + i + '" data-d="1" aria-label="Tăng">+</button></div>' +
         '<strong>' + money(lp) + '</strong><button class="remove" data-rm="' + i + '">Xóa</button></div></li>';
     }).join("") + "</ul>" +

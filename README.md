@@ -6,10 +6,13 @@ Static site (HTML/CSS/JS, no build step), Vietnamese only, mobile first.
 ## Run locally
 
 ```bash
-python -m http.server 5500
+python serve.py
 ```
 
 Then open http://localhost:5500
+
+Links have no `.html` (`/san-pham`, not `/san-pham.html`). GitHub Pages resolves them, and
+`serve.py` does the same locally (`python -m http.server` would 404 on them).
 
 ## Pages
 

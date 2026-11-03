@@ -75,6 +75,7 @@
   }
 
   function packHTML(p, size) {
+    if (p.images) return '<div class="pack pack--photo"><img src="' + p.images[0] + '" loading="lazy" alt="' + esc(p.name) + '"></div>';
     return '<div class="pack' + (p.combo ? " pack--combo" : "") + '"><div class="pack__box" style="--c1:' + p.colors[0] + ";--c2:" + p.colors[1] + '">' +
       '<span class="pack__brand">Bazan Cacao</span><span class="pack__name">' + esc(p.name) + '</span><span class="pack__size">' + esc(size || p.variants[0].label) + "</span></div></div>";
   }
@@ -342,12 +343,17 @@
     ).map(function (r, i) {
       return "<details" + (i === 0 ? " open" : "") + "><summary>" + r[0] + "</summary><div><p>" + esc(r[1]).replace(/\n/g, "<br>") + "</p></div></details>";
     }).join("");
+    var thumbs = p.images && p.images.length > 1
+      ? '<div class="thumbs">' + p.images.map(function (src, i) {
+          return '<button type="button" data-img="' + src + '"' + (i === 0 ? ' aria-current="true"' : "") + ' aria-label="Ảnh ' + (i + 1) + '"><img src="' + src + '" alt=""></button>';
+        }).join("") + "</div>"
+      : "";
     var priceNote = p.variants.length > 1 ? " <small>(giá đổi theo khối lượng)</small>" : "";
     var related = BZ.products.filter(function (x) { return x.id !== p.id && !!x.combo === !!p.combo; }).slice(0, 3);
 
     el.innerHTML =
       '<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="san-pham">Sản phẩm</a> / ' + esc(p.name) + "</nav>" +
-      '<div class="pd"><div class="pd__media">' + packHTML(p) + "</div><div>" +
+      '<div class="pd"><div class="pd__media">' + packHTML(p) + thumbs + "</div><div>" +
       '<span class="eyebrow">' + esc(p.category) + "</span>" +
       "<h1>" + esc(p.name) + "</h1>" +
       '<div class="pd__price" id="pd-price">' + fromPrice(p) + priceNote + "</div>" +
@@ -369,7 +375,15 @@
       r.addEventListener("change", function () {
         var v = p.variants.find(function (x) { return x.label === r.value; });
         $("#pd-price").innerHTML = money(v.price) + priceNote;
-        $(".pack__size", el).textContent = v.label;
+        var size = $(".pack__size", el);
+        if (size) size.textContent = v.label;
+      });
+    });
+    $$("[data-img]", el).forEach(function (b) {
+      b.addEventListener("click", function () {
+        $(".pd__media .pack img", el).src = b.dataset.img;
+        $$("[data-img]", el).forEach(function (x) { x.removeAttribute("aria-current"); });
+        b.setAttribute("aria-current", "true");
       });
     });
     $("#pd-add").addEventListener("click", function () {

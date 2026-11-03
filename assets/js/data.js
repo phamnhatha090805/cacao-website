@@ -19,11 +19,13 @@ window.BZ = {
   },
 
   // category: dòng chữ nhỏ trên tên sản phẩm. Combo chỉ có "contents" (Trong bộ có).
+  // images: ảnh thật (ảnh đầu dùng cho thẻ sản phẩm); chưa có ảnh thì hiện hình minh họa bao bì.
   products: [
     {
       id: "bot-cacao",
       category: "Bột cacao",
       name: "Bột cacao nguyên chất",
+      images: ["assets/img/sp-bot-cacao.jpg", "assets/img/sp-bot-cacao-ngang.jpg"],
       variants: [
         { label: "150g", price: 149000 },
         { label: "250g", price: 239000 },
@@ -39,6 +41,7 @@ window.BZ = {
       id: "socola-85",
       category: "Socola",
       name: "Socola đen 85% cacao",
+      images: ["assets/img/sp-socola-85.jpg", "assets/img/sp-socola-85-ngang.jpg"],
       variants: [{ label: "40g", price: 95000 }],
       colors: ["#1F2D13", "#FFF1D6"],
       desc: "Thanh socola đen 85% cacao, ít ngọt. Đắng đậm, tan chậm, hợp nhâm nhi cùng cà phê hoặc trà.",
